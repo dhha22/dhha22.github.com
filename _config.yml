@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-baseurl: "/blog"
+baseurl: "/sub-directory"
 url: "https://dhha22.github.io"
 
 # THEME-SPECIFIC CONFIGURATION
