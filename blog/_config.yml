@@ -5,28 +5,27 @@ url: "https://dhha22.github.io"
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
   # Meta
-  title: dhha22 Developer Blog
+  title: dhha22
   avatar: assets/img/triangle.svg
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-  description: "A website with blog posts and pages" # used by search engines
+  description: 안드로이드 기술 블로그 입니다.
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p>Change header text in <code>_config.yml</code> <br> to update this feature.</p>
+     <p>안드로이드 기술 블로그</p>
   header_text_feature_image: assets/img/pexels/triangular.jpeg
-  footer_text: >
-   Copyright © dhha22. All rights reserved 
+  footer_text: Copyright ©dhha22. All rights reserved 
   # Icons
-  rss: true
-  email_address: # Full email address, e.g. "sam@example.com"
+  rss: false
+  email_address: "dhha77@gmail.com"
   behance:
   bitbucket:
   dribbble:
   facebook:
   flickr:
   gitlab:
-  github: "sylhare"
+  github: "dhha22"
   google_plus:
   instagram:
   keybase:
