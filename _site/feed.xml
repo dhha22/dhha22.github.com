@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dhha22</title>
+    <title>Tech Blog</title>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>안드로이드 기술 블로그 입니다.</description>
-    <pubDate>Fri, 02 Feb 2018 11:37:22 +0900</pubDate>
+    <pubDate>Sun, 04 Feb 2018 13:50:36 +0900</pubDate>
     
       <item>
         <title>MVVM</title>
