@@ -5,7 +5,7 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>안드로이드 기술 블로그 입니다.</description>
-    <pubDate>Tue, 06 Feb 2018 17:31:06 +0900</pubDate>
+    <pubDate>Tue, 06 Feb 2018 23:27:40 +0900</pubDate>
     
       <item>
         <title>MVVM</title>
@@ -13,13 +13,13 @@
         <guid isPermaLink="true">/android/2018/02/02/Model-View-ViewModel.html</guid>
         <description>&lt;h2 id=&quot;model---view---viewmodel&quot;&gt;Model - View - ViewModel&lt;/h2&gt;
 
-&lt;p&gt;MVVM(Model-View-ViewModel)은 Microsoft의 Ken Cooper와 Ted Peters가 개발한 아키텍처입니다.
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;(Model-View-ViewModel)은 Microsoft의 Ken Cooper와 Ted Peters가 개발한 아키텍처입니다.
 데이터 바인딩 메커니즘을 사용한 UI부분의 추상화가 특징입니다.&lt;/p&gt;
 
-&lt;p&gt;MVVM의 개념은 세 가지 역할로 구성되어 있습니다, 사용자 인터페이스 (UI)의 분리를 목적으로 한 아키텍처 입니다. (그림 1.6)&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;의 개념은 세 가지 역할(&lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel&lt;/code&gt;)로 구성되어 있으며, 유저 인터페이스 (UI)의 분리를 목적으로 한 아키텍처 입니다. (그림 1.6)&lt;/p&gt;
 
-&lt;p&gt;응용 프로그램의 UI와 비즈니스 로직을 연관 데이터 바인딩을 이용하여 관계를 분리합니다. 
-View의 추상화 행위, 비즈니스 로직, 도메인 모델 중에서 View 관련된 글루 코드를 없애는 메리트가 있습니다.
+&lt;p&gt;어플리케이션의 &lt;code class=&quot;highlighter-rouge&quot;&gt;UI&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;비즈니스 로직&lt;/code&gt;을 연관 데이터 바인딩을 이용하여 관계를 분리합니다. 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;의 추상화를 실시하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;비즈니스 로직&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;도메인 모델&lt;/code&gt; 안에 있는  &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;에 관련된 글루 코드를 없애는 메리트가 있습니다.
 &lt;img src=&quot;/assets/img/architecture-pattern/image_1.6.png&quot; alt=&quot;그림_1.6&quot; /&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -28,58 +28,62 @@ View의 추상화 행위, 비즈니스 로직, 도메인 모델 중에서 View �
 
 &lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
 
-&lt;p&gt;Model은 어플리케이션 도메인 모델을 말합니다. 데이터 구조 외에 비즈니스 로직을 표현하는 수단도 모델에 포함되어 있습니다.&lt;/p&gt;
+&lt;p&gt;Model은 어플리케이션 &lt;code class=&quot;highlighter-rouge&quot;&gt;도메인 모델&lt;/code&gt;을 말합니다. 데이터 구조 외에 비즈니스 로직을 표현하는 수단도 모델에 포함되어 있습니다.&lt;/p&gt;
 
 &lt;h4 id=&quot;view&quot;&gt;View&lt;/h4&gt;
 
-&lt;p&gt;View는 사용자가 보는 구조, 레이아웃, 모양을 정의하는 역할을 담당합니다. 비즈니스에 관련된 로직에서 분리되어 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;는 사용자가 보는 구조, 레이아웃, 모양을 정의하는 역할을 담당합니다. 비즈니스에 관련된 로직에서 분리되어 있습니다.&lt;/p&gt;
 
 &lt;h4 id=&quot;view-model&quot;&gt;View Model&lt;/h4&gt;
 
-&lt;p&gt;ViewModel은 Model과 View의 중재자입니다. 표시에 관련된 로직을 담당합니다.
-Model을 조작하고 View가 사용하기 쉬운 형태로 데이터를 제공하는 역할을 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model &lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;의 중재자입니다. 표시에 관련된 로직을 담당합니다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Model &lt;/code&gt;을 조작하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;가 사용하기 쉬운 형태로 데이터를 제공하는 역할을 합니다.&lt;/p&gt;
 
-&lt;p&gt;ViewModel은 View를 Model로부터 격리하고 Model과 View를 독립적으로 진화시키기 위한 것입니다. 
-View는 ViewModel을 알고 있으며, ViewModel은 Model을 파악하고 있습니다. 
-반대로 Model은 ViewModel을 인식하지 못하고 ViewModel도 View에 대해 알지 못합니다. 
-각각독립성을 높이고 (캡슐화), 관심사를 분리하고 효율적인 개발을 목표로하고 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model &lt;/code&gt;로부터 격리하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model &lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;를 독립적으로 진화시키기 위한 것입니다. 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;을 알고 있으며, &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;을 파악하고 있습니다. 
+반대로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;을 인식하지 못하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;도 &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;에 대해 알지 못합니다. 
+각각 독립성을 높이고 (캡슐화), 관심사를 분리하고 효율적인 개발을 목표로하고 있습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;데이터바인딩&quot;&gt;데이터바인딩&lt;/h3&gt;
 
-&lt;p&gt;MVVM 등장 배경에는 데이터 바인딩 (Data Binding) 구조의 발전이 있습니다.
-데이터 바인딩은 데이터 표현과 사용자 인터페이스를 정적 또는 동적으로 바이딩 할 수있는 구조입니다.
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;등장 배경에는 &lt;code class=&quot;highlighter-rouge&quot;&gt;데이터 바인딩 (Data Binding)&lt;/code&gt;구조의 발전이 있습니다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;데이터 바인딩 &lt;/code&gt;은 데이터 표현과 사용자 인터페이스를 정적 또는 동적으로 바인딩 할 수있는 구조입니다.
 데이터 표현은 XML, XAML 등의 마크 업 언어가 사용됩니다. 기능에 따라 2 종류로 분류 할 수 있습니다. (그림 1.7)&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/architecture-pattern/image_1.7.png&quot; alt=&quot;그림_1.7&quot; /&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;단방향-데이터-바인딩&quot;&gt;단방향 데이터 바인딩&lt;/h4&gt;
 
-&lt;p&gt;표시 할 데이터가 변경되면 그에 따라 사용자 인터페이스에 변화를 반영화하는 단방향 바인딩&lt;/p&gt;
+&lt;p&gt;표시 할 데이터가 변경되면 그에 따라 사용자 인터페이스에 변화를 반영화하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;단방향 바인딩&lt;/code&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;양방향-데이터-바인딩&quot;&gt;양방향 데이터 바인딩&lt;/h4&gt;
 
-&lt;p&gt;단방향 이외에, 사용자 인터페이스의 변경 또는 조작에 따라 데이터도 변경해야하는 양방향 데이터 바인딩&lt;/p&gt;
+&lt;p&gt;단방향 이외에, 사용자 인터페이스의 변경 또는 조작에 따라 데이터도 변경해야하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;양방향 데이터 바인딩&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;MVVM의 도입은 데이터 바인딩 또는 유사한 구조를 가진 플랫폼이 전제입니다. 
-MVVM이 ViewModel에 의해 Model과 View를 분리하는 특성상 
-ViewModel에서는 View에 표시되는 데이터를 조립하고 반영해야합니다.
-복잡한 UI 작업을 서포트하는 구조가 데이터 바인딩입니다.
-플랫폼의 적용 예로는 Android에서 XML 및 Java 코드의 바인딩, WPF와 Silverlight 플랫폼을 기반으로 한 XAML과 C # 소스 코드의 바이딩을 들 수 있습니다. JavaScript의 세계에서 DOM (Document Object Model)과 JavaScript 소스 코드를 바인딩하는 형태로 MVVM의 적용 예가 있습니다.
-MVVM 아키텍처에서 데이터 바인딩의 역할은 큰 것입니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM &lt;/code&gt;의 도입은 &lt;code class=&quot;highlighter-rouge&quot;&gt;데이터 바인딩&lt;/code&gt; 또는 유사한 구조를 가진 플랫폼이 전제입니다. 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM &lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel&lt;/code&gt;에 의해 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model  &lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;View  &lt;/code&gt;를 분리하는 특성상 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ViewModel &lt;/code&gt;에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;에 표시되는 데이터를 조립하고 반영해야합니다.
+복잡한 &lt;code class=&quot;highlighter-rouge&quot;&gt;UI&lt;/code&gt;작업을 서포트하는 구조가 &lt;code class=&quot;highlighter-rouge&quot;&gt;데이터 바인딩 &lt;/code&gt;입니다.
+플랫폼의 적용 예로는 Android에서 XML 및 Java 코드의 바인딩, WPF와 Silverlight 플랫폼을 기반으로 한 XAML과 C # 소스 코드의 바이딩을 들 수 있습니다. JavaScript의 세계에서 DOM (Document Object Model)과 JavaScript 소스 코드를 바인딩하는 형태로 &lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM &lt;/code&gt;의 적용 예가 있습니다.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;아키텍처에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;데이터 바인딩&lt;/code&gt;의 역할은 큰 것입니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;mvvm의-기반-개념--presentation-model&quot;&gt;MVVM의 기반 개념 : Presentation Model&lt;/h3&gt;
 
-&lt;p&gt;MVVM은 Martin Fowler의 Presentation Model을 기반으로하고 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;은 Martin Fowler의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Presentation Model&lt;/code&gt;을 기반으로하고 있습니다.&lt;/p&gt;
 
-&lt;p&gt;MVVM의 기반으로 하고 있는 Presentation Model은 View 표시에 관한 정보를 관리하는
-Presentation Model의 상태를 그대로 반영합니다. 
-Presentation Model에서 데이터에 변화가 있으면 View로 설정하고 View 측에서 사용자 이벤트가 발생하면 신속하게 PresentationModel에 통지합니다.
-이 설정 및 알림 작업은 View의 상태를 도메인 모델에서 분리하는 데 필수적입니다.
-이 View (가 제공하는 UI)가 복잡할수록 설정 및 알림 시간이 개발자의 부담입니다.
-(바인딩을위한 코드를 손으로 쓰는 것은 생각보다 귀찮은 것입니다).
-소프트웨어 개발의 진화함에 따라 Presentation Model과 View 동기화하는 PresentationModel 성가신 부분을 데이터 바인딩 메커니즘으로 실현할 수있게 된 것은 기술적인 성과였습니다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Presentation Model : https://martinfowler.com/eaaDev/PresentationModel.html&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;MVVM 아키텍처는 데이터 바인딩 메커니즘을 사용하여 Presentation Model을 개발시켜 (국소 적으로 자동 생성을 사용하여 최적화), View와 Model의 분리를 추진하고 있다고 합니다.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;의 기반으로 하고 있는&lt;code class=&quot;highlighter-rouge&quot;&gt; Presentation Model&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;표시에 관한 정보를 관리하는
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Presentation Model&lt;/code&gt;의 상태를 그대로 반영합니다. 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Presentation Model&lt;/code&gt;에서 데이터에 변화가 있으면 &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;에 설정하고 &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;측에서 사용자 이벤트가 발생하면 신속하게 &lt;code class=&quot;highlighter-rouge&quot;&gt;PresentationModel&lt;/code&gt;에 통지합니다.
+이 설정 및 알림 작업은 &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;의 상태를 &lt;code class=&quot;highlighter-rouge&quot;&gt;도메인 모델&lt;/code&gt;에서 분리하는 데 필수적입니다.
+이 &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt; (가 제공하는 UI)가 복잡할수록 설정 및 알림 시간이 개발자의 부담입니다.
+(바인딩을 위한 코드를 손으로 쓰는 것은 생각보다 귀찮은 것입니다).
+소프트웨어 개발의 진화함에 따라 &lt;code class=&quot;highlighter-rouge&quot;&gt;Presentation Model &lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;View&lt;/code&gt;동기화하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;PresentationModel&lt;/code&gt; 성가신 부분을 데이터 바인딩 메커니즘으로 실현할 수있게 된 것은 기술적인 성과였습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;MVVM&lt;/code&gt;아키텍처는 &lt;code class=&quot;highlighter-rouge&quot;&gt;데이터 바인딩&lt;/code&gt;메커니즘을 사용하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;Presentation Model &lt;/code&gt;을 개발시켜 (국소 적으로 자동 생성을 사용하여 최적화), &lt;code class=&quot;highlighter-rouge&quot;&gt;View &lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;Model&lt;/code&gt;의 분리를 추진하고 있다고 합니다.&lt;/p&gt;
 
 </description>
         <pubDate>Fri, 02 Feb 2018 00:00:00 +0900</pubDate>
