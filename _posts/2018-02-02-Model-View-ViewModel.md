@@ -3,7 +3,7 @@ layout: post
 title: MVVM
 date: 2018-02-02
 categories: Android
-tags: [Android,Architecture]
+tags: [Android, Architecture]
 ---
 
 ## Model - View - ViewModel

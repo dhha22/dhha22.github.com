@@ -13,7 +13,7 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <p><br><br><br><br><font size=28>David Ha 기술 블로그</font><br><br><br><br></p>
+     <p><br><H3>David Ha 기술 블로그</H3><br></p>
   header_text_feature_image: assets/img/main_background.jpg
   footer_text: Copyright ©dhha22. All rights reserved 
   # Icons
