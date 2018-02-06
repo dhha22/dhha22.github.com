@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MVVM
-date: 2018-02-02
+date: 2018-02-07
 thumbnail: "assets/img/thumbnails/mvvm.png"  
 categories: Android
 tags: [Android, Architecture]
