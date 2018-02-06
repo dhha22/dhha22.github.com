@@ -1,10 +1,10 @@
 ---
 layout: post
-title: MVVM
+title: MVVM 패턴
 date: 2018-02-07
 thumbnail: "assets/img/thumbnails/mvvm.png"  
 categories: Android
-tags: [Android, Architecture]
+tags: [Android, Architecture, MVVM]
 ---
 
 ## Model - View - ViewModel
@@ -28,11 +28,11 @@ tags: [Android, Architecture]
 
 #### View
 
-**View**는 사용자가 보는 구조, 레이아웃, 모양을 정의하는 역할을 담당합니다. 비즈니스에 관련된 **로직**에서 분리되어 있습니다.
+**View**는 사용자가 보는 구조, 레이아웃, **모양을 정의하는 역할**을 담당합니다. 비즈니스에 관련된 로직에서 분리되어 있습니다.
 
 #### View Model
 
-**ViewModel**은 **Model**과 **View**의 중재자입니다. 표시에 관련된 로직을 담당합니다.
+**ViewModel**은 **Model**과 **View**의 **중재자**입니다. 표시에 관련된 로직을 담당합니다.
 **Model**을 조작하고 **View**가 사용하기 쉬운 형태로 데이터를 제공하는 역할을 합니다.
 
 
