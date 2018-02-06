@@ -81,9 +81,9 @@ tags: [Android, Architecture]
 
 > Presentation Model: https://martinfowler.com/eaaDev/PresentationModel.html
 
-`MVVM`의 기반으로 하고 있는` Presentation Model`은 `View`표시에 관한 정보를 관리하는
-`Presentation Model`의 상태를 그대로 반영합니다. 
-`Presentation Model`에서 데이터에 변화가 있으면 `View`에 설정하고 `View`측에서 사용자 이벤트가 발생하면 신속하게 `PresentationModel`에 통지합니다.
+**MVVM**의 기반으로 하고 있는**Presentation Model**은 **View**표시에 관한 정보를 관리하는
+**Presentation Model**의 상태를 그대로 반영합니다. 
+**Presentation Model**에서 데이터에 변화가 있으면 **View**에 설정하고 **View**측에서 사용자 이벤트가 발생하면 신속하게 **PresentationModel**에 통지합니다.
 이 설정 및 알림 작업은 **View**의 상태를 **도메인 모델**에서 분리하는 데 필수적입니다.
 이 **View** (가 제공하는 UI)가 복잡할수록 설정 및 알림 시간이 개발자의 부담입니다.
 (바인딩을 위한 코드를 손으로 쓰는 것은 생각보다 귀찮은 것입니다).
