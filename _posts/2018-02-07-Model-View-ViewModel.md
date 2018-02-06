@@ -91,3 +91,4 @@ tags: [Android, Architecture]
 
 **MVVM**아키텍처는 **데이터 바인딩**메커니즘을 사용하여 **Presentation Model**을 개발시켜 (국소 적으로 자동 생성을 사용하여 최적화), **View**와 **Model**의 분리를 추진하고 있다고 합니다.
 
+> [출처] : Android アプリ設計パターン入門 
