@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- JQuery (used for bootstrap and jekyll search) -->
+    <script src="/assets/js/jquery-3.2.1.min.js" ></script>
+    
+    <!-- Main JS (navbar.js and katex_init.js)-->
+    <script defer=true src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/android/2018/02/22/RxJava%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%8C%E1%85%A1%E1%86%AF-%E1%84%83%E1%85%A1%E1%84%85%E1%85%AE%E1%86%AF%E1%84%89%E1%85%AE-%E1%84%8B%E1%85%B5%E1%86%BB%E1%84%82%E1%85%B3%E1%86%AB-5%E1%84%80%E1%85%A1%E1%84%8C%E1%85%B5-Tip.html">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Tech Blog" href="http://localhost:4000///feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/katex.min.css">
+    <script src="/assets/js/katex.min.js">
+    </script>
+    
+
+    <!-- Google Analytics -->
+    
+    
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>RxJava를 잘 다룰수 있는 5가지 Tip</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="RxJava를 잘 다룰수 있는 5가지 Tip" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="RxJava를 잘 다룰수 있는 5가지 Tip" />
+<meta property="og:description" content="RxJava를 잘 다룰수 있는 5가지 Tip" />
+<link rel="canonical" href="http://localhost:4000/android/2018/02/22/RxJava%EB%A5%BC-%EC%9E%98-%EB%8B%A4%EB%A3%B0%EC%88%98-%EC%9E%88%EB%8A%94-5%EA%B0%80%EC%A7%80-Tip.html" />
+<meta property="og:url" content="http://localhost:4000/android/2018/02/22/RxJava%EB%A5%BC-%EC%9E%98-%EB%8B%A4%EB%A3%B0%EC%88%98-%EC%9E%88%EB%8A%94-5%EA%B0%80%EC%A7%80-Tip.html" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-02-22T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"RxJava를 잘 다룰수 있는 5가지 Tip","@type":"BlogPosting","url":"http://localhost:4000/android/2018/02/22/RxJava%EB%A5%BC-%EC%9E%98-%EB%8B%A4%EB%A3%B0%EC%88%98-%EC%9E%88%EB%8A%94-5%EA%B0%80%EC%A7%80-Tip.html","headline":"RxJava를 잘 다룰수 있는 5가지 Tip","dateModified":"2018-02-22T00:00:00+09:00","datePublished":"2018-02-22T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/android/2018/02/22/RxJava%EB%A5%BC-%EC%9E%98-%EB%8B%A4%EB%A3%B0%EC%88%98-%EC%9E%88%EB%8A%94-5%EA%B0%80%EC%A7%80-Tip.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Manual seo tags -->
+    <!--
+    <title>RxJava를 잘 다룰수 있는 5가지 Tip | Tech Blog</title>
+    <meta name="description" content="RxJava를 잘 다룰수 있는 5가지 Tip">
+    -->
+</head>
+
+  <body>
+    <header class="site-header">
+    
+    <!-- Logo and title -->
+	<div class="branding">
+		<a href="/">
+			<img class="avatar" src="/assets/img/my_profile.png" alt=""/>
+		</a>
+
+		<h1 class="site-title">
+			<a href="/">Tech Blog</a>
+		</h1>
+	</div>
+    
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+    
+    <!-- Menu -->
+    <ul>
+        
+        
+        
+        
+        
+        
+        <li>
+            <a class="clear" href="/about/">
+                About
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        <li>
+            <a class="clear" href="http://localhost:4000/search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a class="clear" href="http://localhost:4000/tags">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+    </ul>
+        
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="background-image: url('/')">
+    <h1 id="RxJava%EB%A5%BC+%EC%9E%98+%EB%8B%A4%EB%A3%B0%EC%88%98+%EC%9E%88%EB%8A%94+5%EA%B0%80%EC%A7%80+Tip" class="title">RxJava를 잘 다룰수 있는 5가지 Tip</h1>
+    <p class="meta">
+    February 22, 2018
+    
+    </p>
+  </header>
+  <section class="post-content"><h2 id="rxjava를-잘-다룰수-있는-5가지-tip">RxJava를 잘 다룰수 있는 5가지 Tip</h2>
+
+<p>RxJava를 처음 사용하거나 알고 있어도 항상 배워야 할 새로운 것이 있습니다.
+해당 5가지 Tip을 알게 되면 RxJava를 좀 더 능숙하게 다룰 수 있게 됩니다.</p>
+
+<blockquote>
+  <p>해당 글은 RxJava 1.2.6 에서 사용할 수 있는 API를 참조합니다.</p>
+</blockquote>
+
+<h3 id="1-map-과-flatmap을-사용하는-시점">1. map 과 flatmap을 사용하는 시점</h3>
+
+<p><strong>map</strong>과 <strong>flatmap</strong>은  ReactiveX 에서 자주 사용 되는 연산자 입니다.
+하지만 해당 연산자들을 언제 써야할지 잘 모르는 경우가 있습니다.
+<strong>map</strong>과 <strong>flatmap</strong>은 <strong>Observable</strong>에서 방출된 각각의 아이템들을 변환시키기 위한 연산자 입니다.
+<strong>map</strong>은 항목 하나만 내보내는 반면 <strong>flatmap</strong>은 0개 이상의 항목을 내보냅니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.1.png" alt="image_1.1" /></p>
+
+<p>위 예제를 보면 <strong>map</strong>연산자는 <strong>split</strong>함수를 이용하여 각 문자열 마다 적용하여 문자열 배열을 포함하는 하나의 항목을 내보냅니다. 하나의 항목을 다른 항목으로 변환하고 싶을 경우 이 연산자를 사용하면 됩니다.</p>
+
+<p>하지만 위 문자열들을 하나의 단일 스트림에 추가하고 싶을 경우에는 <strong>flatmap</strong>을 사용하면 됩니다.
+<strong>flatmap</strong>연산자는 single sequence로 방출된 단어의 배열을 flattens 하게 만듭니다.</p>
+
+<h3 id="2-observablecreate를-사용하여-observables를-생성하지-않도록-한다">2. Observable.create(…)를 사용하여 observables를 생성하지 않도록 한다</h3>
+
+<p>개발하다 보면 기존의 동기식 또는 비동기식 API를 반응식 API로 변환해야할 경우가 있습니다.
+<strong>Observable.create</strong>를 사용하여 개발할 수 있지만 다음과 같은 방식을 따라야 합니다.</p>
+
+<ul>
+  <li>Observable 구독 취소 시 callback 등록 취소 (그렇게 하지 않을 경우 메모리 누수가 발생할 수 있음)</li>
+  <li>구독자가 구독하고 있을 경우에만 onNext 또는 onCompleted를 사용하여 이벤트를 보내야함</li>
+  <li>onError를 사용하여 upstream으로 오류를 전파해야함</li>
+  <li>backpressure 조절</li>
+</ul>
+
+<p>위와 같은 요구사항을 따르며 직접 구현하는것은 어렵지만 다행히도 직접 구현하지 않아도 됩니다. RxJava에서 이를 위해 몇가지 <strong>static helper method</strong>를 제공합니다.</p>
+
+<h4 id="synconsubscribe">SyncOnSubscribe</h4>
+
+<p><code class="highlighter-rouge">OnSubscribe&lt;T&gt;</code> 구현은 끌어오기(pull) 기반이며 <strong>backpressure</strong>를 명로하게 내장했습니다. 
+<strong>SyncOnSubscribe</strong> 는 <strong>backpressure</strong>이 가능한 <strong>Observable</strong>을 제작할 수 있게 도와주는 편리한 유틸리티입니다.</p>
+
+<blockquote>
+  <p>backpressure가 이해가 안되신 분들은 <strong>‘3. backpressure를 다루는 방법’</strong>을 읽고 오시길 바랍니다.</p>
+</blockquote>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="kt">byte</span><span class="o">[]&gt;</span> <span class="nf">readFile</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">FileInputStream</span> <span class="n">stream</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">SyncOnSubscribe</span><span class="o">&lt;</span><span class="n">FileInputStream</span><span class="o">,</span> <span class="kt">byte</span><span class="o">[]&gt;</span> <span class="n">fileReader</span> <span class="o">=</span> <span class="n">SyncOnSubscribe</span><span class="o">.</span><span class="na">createStateful</span><span class="o">(</span>
+    <span class="o">()</span> <span class="o">-&gt;</span> <span class="n">stream</span><span class="o">,</span>
+    <span class="o">(</span><span class="n">stream</span><span class="o">,</span> <span class="n">output</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span>
+      <span class="k">try</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">byte</span><span class="o">[</span><span class="n">BUFFER_SIZE</span><span class="o">];</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="na">read</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+          <span class="n">output</span><span class="o">.</span><span class="na">onCompleted</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+          <span class="n">output</span><span class="o">.</span><span class="na">onNext</span><span class="o">(</span><span class="n">buffer</span><span class="o">);</span>
+        <span class="o">}</span>
+      <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">IOException</span> <span class="n">error</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">output</span><span class="o">.</span><span class="na">onError</span><span class="o">(</span><span class="n">error</span><span class="o">);</span>
+      <span class="o">}</span>
+      <span class="k">return</span> <span class="n">stream</span><span class="o">;</span>
+    <span class="o">},</span>
+    <span class="n">s</span> <span class="o">-&gt;</span> <span class="n">IOUtil</span><span class="o">.</span><span class="na">closeSilently</span><span class="o">(</span><span class="n">s</span><span class="o">));</span>
+  <span class="k">return</span> <span class="n">Observable</span><span class="o">.</span><span class="na">create</span><span class="o">(</span><span class="n">fileReader</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="fromcallable">fromCallable</h4>
+
+<p>단순한 동기 API를 wrapping 하여 반응형 API로 변환하는데 유용한 <strong>static helper</strong>입니다. 추가로 <strong>fromCallable</strong>는 예외도 처리합니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">Boolean</span><span class="o">&gt;</span> <span class="nf">enablePushNotifications</span><span class="o">(</span><span class="kt">boolean</span> <span class="n">enable</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromCallable</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">sharedPrefs</span>
+    <span class="o">.</span><span class="na">edit</span><span class="o">()</span>
+    <span class="o">.</span><span class="na">putBoolean</span><span class="o">(</span><span class="n">KEY_PUSH_NOTIFICATIONS_PREFS</span><span class="o">,</span> <span class="n">enable</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">commit</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h4 id="fromemitter">fromEmitter</h4>
+
+<p><strong>Observable</strong>이 <strong>unsubscribed</strong> 되었을 때 비동기 API를 wrapping 하고 리소스를 관리하는데 유용한 <strong>static helper</strong>입니다. <strong>fromCallable</strong>과 달리 여러 항목을 내보낼 수 있습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">android.bluetooth.le.BluetoothLeScanner</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.bluetooth.le.ScanCallback</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.bluetooth.le.ScanResult</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">android.support.annotation.NonNull</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">rx.Emitter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">rx.Observable</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">RxBluetoothScanner</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">ScanResultException</span> <span class="kd">extends</span> <span class="n">RuntimeException</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="nf">ScanResultException</span><span class="o">(</span><span class="kt">int</span> <span class="n">errorCode</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kd">super</span><span class="o">(</span><span class="s">"Bluetooth scan failed. Error code: "</span> <span class="o">+</span> <span class="n">errorCode</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="nf">RxBluetoothScanner</span><span class="o">()</span> <span class="o">{</span>
+    <span class="o">}</span>
+
+    <span class="nd">@NonNull</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">ScanResult</span><span class="o">&gt;</span> <span class="nf">scan</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="kd">final</span> <span class="n">BluetoothLeScanner</span> <span class="n">scanner</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">Observable</span><span class="o">.</span><span class="na">fromEmitter</span><span class="o">(</span><span class="n">scanResultEmitter</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="kd">final</span> <span class="n">ScanCallback</span> <span class="n">scanCallback</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ScanCallback</span><span class="o">()</span> <span class="o">{</span>
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onScanResult</span><span class="o">(</span><span class="kt">int</span> <span class="n">callbackType</span><span class="o">,</span> <span class="nd">@NonNull</span> <span class="n">ScanResult</span> <span class="n">result</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">scanResultEmitter</span><span class="o">.</span><span class="na">onNext</span><span class="o">(</span><span class="n">result</span><span class="o">);</span>
+                <span class="o">}</span>
+
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onBatchScanResults</span><span class="o">(</span><span class="nd">@NonNull</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">ScanResult</span><span class="o">&gt;</span> <span class="n">results</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="k">for</span> <span class="o">(</span><span class="n">ScanResult</span> <span class="n">r</span> <span class="o">:</span> <span class="n">results</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="n">scanResultEmitter</span><span class="o">.</span><span class="na">onNext</span><span class="o">(</span><span class="n">r</span><span class="o">);</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+
+                <span class="nd">@Override</span>
+                <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onScanFailed</span><span class="o">(</span><span class="kt">int</span> <span class="n">errorCode</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">scanResultEmitter</span><span class="o">.</span><span class="na">onError</span><span class="o">(</span><span class="k">new</span> <span class="n">ScanResultException</span><span class="o">(</span><span class="n">errorCode</span><span class="o">));</span>
+                <span class="o">}</span>
+            <span class="o">};</span>
+            
+            <span class="n">scanResultEmitter</span><span class="o">.</span><span class="na">setCancellation</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">scanner</span><span class="o">.</span><span class="na">stopScan</span><span class="o">(</span><span class="n">scanCallback</span><span class="o">));</span>
+            <span class="n">scanner</span><span class="o">.</span><span class="na">startScan</span><span class="o">(</span><span class="n">scanCallback</span><span class="o">);</span>
+        <span class="o">},</span> <span class="n">Emitter</span><span class="o">.</span><span class="na">BackpressureMode</span><span class="o">.</span><span class="na">BUFFER</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="3-backpressure를-다루는-방법">3. Backpressure를 다루는 방법</h3>
+
+<p><strong>Observable</strong>가 이벤트를 너무 빨리 생성했을 경우 <strong>Observer downstream</strong>은 이벤트를 처리할 수 없게 됩니다.
+이럴때 우리들은 <strong>MissingBackpressureException</strong>을 만나게 됩니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.2.png" alt="image_1.2" /></p>
+
+<p>RxJava는 <strong>backpressure</strong>를 다룰 수 있는 몇가지 방법을 제공하지만 상황에 따라 선택하는게 좋습니다.</p>
+
+<h4 id="cold-vs-hot-observables">Cold vs Hot Observables</h4>
+
+<p><strong>Cold Observable</strong>는 <strong>subscribe</strong> 할 경우 아이템들을 방출하기 시작합니다.
+<strong>Cold Observable</strong>의 예로는 File 읽기, 데이터베이스 쿼리, 웹 요청, 정적 iterable를 Observable 변환 등 이 있습니다.</p>
+
+<p><strong>Hot Observable</strong>는 <strong>subscribe</strong>과 관계 없이 연속적으로 이벤트를 방출합니다. 
+Observer가 <strong>Hot Observable</strong>를 <strong>subscribe</strong>하면 다음중 하나를 수행할 수 있습니다.</p>
+
+<ul>
+  <li>방출되었던 모든 이벤트의 일부분을 받습니다.</li>
+  <li>방출되었던 모든 이벤트를 받습니다.</li>
+  <li>새로운 이벤트가 발생할 때 받습니다.</li>
+</ul>
+
+<p><strong>Hot Observable</strong>의 예로는 터치 이벤트, 알림, 업데이트 진행 등 이 있습니다.</p>
+
+<p><strong>Hot Observable</strong>은 이벤트를 연속적으로 방출하기 때문에 사용자는 속도를 제어 할 수 없습니다.
+예를들어 터치이벤트가 발생했을 경우 사용자는 터치이벤트의 속도를 제어할 수 없습니다. 따라서 아래 전략중 하나를 사용하는것이 가장 좋습니다.</p>
+
+<h4 id="backpressuremodenone-과-backpressuremodeerror">BackpressureMode.NONE 과 BackPressureMode.ERROR</h4>
+
+<p>이 두개의 Mode에서 방출된 이벤트는 <strong>backpressure</strong>이 되지 않습니다.
+observeOn의 내부 16 element 크기의 buffer가 overflow가 발생했을 경우 <strong>MissingBackpressureException</strong>가 나타납니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.3.png" alt="image_1.3" /></p>
+
+<h4 id="backpressuremodebuffer">BackpressureMode.BUFFER</h4>
+
+<p>이 모드에서는 초기 크기가 128인 무한 buffer가 만들어집니다. 너무 빨리 방출된 항목은 무제한으로 버퍼링됩니다. buffer가 소모되지 않으면 항목은 메모리가 모두 소모 될 때 까지 계속 누적됩니다. 결국 <strong>OutOfMemoryException</strong>을 만나게 됩니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.4.png" alt="image_1.4" /></p>
+
+<h4 id="backpressuremodedrop">BackpressureMode.DROP</h4>
+
+<p>이 모드에서는 크기가 1인 고정 buffer를 사용합니다. <strong>downstream observable</strong>는 유지되지 않으면 첫번째 항목이 버퍼링되고 그 다음 방출된 이벤트들이 삭제됩니다. <strong>consumer</strong>가 다음 값을 받을 수 있는 상태가 되면 **Observable **이 방출한 첫번째 값을 받습니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.5.png" alt="image_1.5" /></p>
+
+<h4 id="backpressuremodelatest">BackpressureMode.LATEST</h4>
+
+<p>이 모드는 <strong>BackpressureMode.DROP</strong>과 비슷합니다. 이 모드도 역시 크기가 1인 고정 버퍼를 사용합니다. 그러나 첫번째 항목을 버퍼링 하고 그 다음 방출된 이벤트를 삭제하는게 아니라 <strong>BackpressureMode.LATEST</strong>는 버퍼의 항목을 최신 방출로 바꿉니다. <strong>consumer</strong>가 다음 값을 받을 수 있는 상태가 되면 <strong>Observable</strong>이 방출한 최신 값을 받습니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.6.png" alt="image_1.6" /></p>
+
+<h3 id="4-실수로-스트림을-종료하는-실수를-방지하는-방법">4. 실수로 스트림을 종료하는 실수를 방지하는 방법</h3>
+
+<p>RxJava는 Observable sequence에 오류가 발생했을 경우 sequence를 종료하고 sequence에 알림을 보내 해당 오류를 전달합니다.</p>
+
+<p>하지만 sequence의 종료를 원하지 않을 수도 있습니다. 이러한 경우 RxJava는 sequence를 종료하지 않고도 오류를 처리 할 수 있는 다양한 방법을 제공합니다.</p>
+
+<h4 id="onerrorresumenext">onErrorResumeNext</h4>
+
+<p><strong>onErrorResumeNext</strong> 를 사용하게 되면 해당 오류를 가로챌 수 있고 다른 <strong>Observable</strong>값으로 반환할 수 있습니다.</p>
+
+<p>오류를 추가 정보로 wrap 하고 새 오류를 반환하거나 수신할 새로운 이벤트로 반환할 수 있습니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">SearchResult</span><span class="o">&gt;</span> <span class="nf">search</span><span class="o">(</span><span class="nd">@NotNull</span> <span class="n">EditText</span> <span class="n">searchView</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">RxTextView</span><span class="o">.</span><span class="na">textChanges</span><span class="o">(</span><span class="n">searchView</span><span class="o">)</span> 
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">CharSequence:</span><span class="o">:</span><span class="n">toString</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">debounce</span><span class="o">(</span><span class="mi">500</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">)</span>   
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>            
+    <span class="o">.</span><span class="na">observeOn</span><span class="o">(</span><span class="n">workerScheduler</span><span class="o">)</span>             
+    <span class="o">.</span><span class="na">switchMap</span><span class="o">(</span><span class="n">query</span> <span class="o">-&gt;</span> <span class="n">searchService</span><span class="o">.</span><span class="na">query</span><span class="o">(</span><span class="n">query</span><span class="o">))</span>   
+    <span class="o">.</span><span class="na">onErrorResumeNext</span><span class="o">(</span><span class="n">Observable</span><span class="o">.</span><span class="na">empty</span><span class="o">());</span> <span class="c1">// 에러가 발생할 경우 텍스트 뷰 변경을 중단</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>onErrorResumeNext</strong> 연산자를 사용하면 <strong>down stream sequence</strong>를 복구하지만 <strong>onError</strong> 알림이 생성되었으므로 <strong>upstream sequence</strong>가 종료됩니다. 만약 <strong>Subject</strong>를 사용할 때 <strong>onError</strong> 알림이 발생했을 경우 <strong>Subject</strong>는 종료됩니다.</p>
+
+<p><strong>upstream</strong>을 계속 실행하고 싶다면 <strong>Observable</strong>를 <strong>onErrorResumeNext</strong> 연산자의 <strong>flatMap</strong> 또는 <strong>switchMap</strong> 연산자 내부에 선언하면 됩니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">SearchResult</span><span class="o">&gt;</span> <span class="nf">search</span><span class="o">(</span><span class="nd">@NotNull</span> <span class="n">EditText</span> <span class="n">searchView</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">return</span> <span class="n">RxTextView</span><span class="o">.</span><span class="na">textChanges</span><span class="o">(</span><span class="n">searchView</span><span class="o">)</span> 
+    <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">CharSequence:</span><span class="o">:</span><span class="n">toString</span><span class="o">)</span>
+    <span class="o">.</span><span class="na">debounce</span><span class="o">(</span><span class="mi">500</span><span class="o">,</span> <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">)</span>   
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">s</span> <span class="o">-&gt;</span> <span class="n">s</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="o">)</span>            
+    <span class="o">.</span><span class="na">observeOn</span><span class="o">(</span><span class="n">workerScheduler</span><span class="o">)</span>             
+    <span class="o">.</span><span class="na">switchMap</span><span class="o">(</span><span class="n">query</span> <span class="o">-&gt;</span> <span class="n">searchService</span><span class="o">.</span><span class="na">query</span><span class="o">(</span><span class="n">query</span><span class="o">)</span>   
+    			<span class="o">.</span><span class="na">onErrorResumeNext</span><span class="o">(</span><span class="n">Observable</span><span class="o">.</span><span class="na">empty</span><span class="o">()));</span> 
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="5-observable을-공유하는-방법">5. Observable을 공유하는 방법</h3>
+
+<p>때때로 <strong>Observable</strong>의 결과물을 여러 <strong>Observer</strong>과 공유해야할 때가 있습니다. <strong>Observable</strong>에서 RxJava로 방출 된 이벤트를 <strong>multicast</strong> 하는 두가지 방법은 <strong>share</strong> 과 <strong>publish</strong> 이 있습니다.</p>
+
+<h4 id="share">Share</h4>
+
+<p><strong>share</strong> 연산자를 사용하면 여러 <strong>Observer</strong>가 <strong>Observable</strong>에 연결하여 방출된 이벤트를 공유할 수 있습니다 .</p>
+
+<p>아래 예제에서 <strong>Observable</strong>는 MotionEvent 아이템들을 방출합니다. 그런 다음 <strong>DOWN</strong> 및 <strong>UP</strong> 터치 이벤트를 걸러낼 두개의 <strong>Observable</strong>들을 만듭니다.</p>
+
+<p><strong>Down</strong>이벤트들은 <strong>빨강색 원</strong>을 그리고 <strong>UP</strong>이벤트들은 <strong>파란색 원</strong>을 그립니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">touchEventHandler</span><span class="o">(</span><span class="nd">@NotNull</span> <span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">MotionEvent</span><span class="o">&gt;</span> <span class="n">motionEventObservable</span> <span class="o">=</span> <span class="n">RxView</span><span class="o">.</span><span class="na">touches</span><span class="o">(</span><span class="n">view</span><span class="o">).</span><span class="na">share</span><span class="o">();</span>
+  <span class="c1">// Capture down events</span>
+  <span class="kd">final</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">MotionEvent</span><span class="o">&gt;</span> <span class="n">downEventsObservable</span> <span class="o">=</span> <span class="n">motionEventObservable</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">);</span>
+  <span class="c1">// Capture up events</span>
+  <span class="kd">final</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">MotionEvent</span><span class="o">&gt;</span> <span class="n">upEventsObservable</span> <span class="o">=</span> <span class="n">motionEventObservable</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span><span class="o">);</span>
+
+  <span class="c1">// Show a red circle at the position where the down event ocurred</span>
+  <span class="n">subscriptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">downEventsObservable</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span>
+      <span class="n">view</span><span class="o">.</span><span class="na">showCircle</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">)));</span>
+  <span class="c1">// Show a blue circle at the position where the up event ocurred</span>
+  <span class="n">subscriptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">upEventsObservable</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span>
+      <span class="n">view</span><span class="o">.</span><span class="na">showCircle</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">Color</span><span class="o">.</span><span class="na">BLUE</span><span class="o">)));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Observer</strong>가 <strong>Observable</strong>를 <strong>subscribe</strong> 했을 경우 이벤트가 방출되기 시작됩니다. 이벤트가 방출되고나서 <strong>subscribe</strong> 했을 경우 앞에 방출되었던 이벤트를 놓치게 되기 때문에 문제가 됩니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.7.gif" alt="image_1.7" /></p>
+
+<p>위 예제에서 파란색 <strong>Observer</strong>는 첫번째 값이 방출되고 난 이후 <strong>subscribe</strong> 했기 때문에 해당 이벤트를 놓치게 됩니다. 이벤트를 놓치고 싶지 않다면 <strong>publish</strong> 연산자를 사용하면 됩니다.</p>
+
+<h4 id="publish">Publish</h4>
+
+<p><strong>publish</strong> 연산자를 호출 했을 경우 <strong>Observable</strong>는 <strong>ConnectedObservable</strong>로 변화합니다.</p>
+
+<p>아래 예제는 <strong>publish</strong>연산자를 사용한 부분을 제외하고 위 예제와 동일합니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">touchEventHandler</span><span class="o">(</span><span class="nd">@NotNull</span> <span class="n">View</span> <span class="n">view</span><span class="o">)</span> <span class="o">{</span>
+  <span class="kd">final</span> <span class="n">ConnectedObservable</span><span class="o">&lt;</span><span class="n">MotionEvent</span><span class="o">&gt;</span> <span class="n">motionEventObservable</span> <span class="o">=</span> <span class="n">RxView</span><span class="o">.</span><span class="na">touches</span><span class="o">(</span><span class="n">view</span><span class="o">).</span><span class="na">publish</span><span class="o">();</span>
+  <span class="c1">// Capture down events</span>
+  <span class="kd">final</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">MotionEvent</span><span class="o">&gt;</span> <span class="n">downEventsObservable</span> <span class="o">=</span> <span class="n">motionEventObservable</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_DOWN</span><span class="o">);</span>
+  <span class="c1">// Capture up events</span>
+  <span class="kd">final</span> <span class="n">Observable</span><span class="o">&lt;</span><span class="n">MotionEvent</span><span class="o">&gt;</span> <span class="n">upEventsObservable</span> <span class="o">=</span> <span class="n">motionEventObservable</span>
+    <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span> <span class="n">event</span><span class="o">.</span><span class="na">getAction</span><span class="o">()</span> <span class="o">==</span> <span class="n">MotionEvent</span><span class="o">.</span><span class="na">ACTION_UP</span><span class="o">);</span>
+
+  <span class="c1">// Show a red circle at the position where the down event ocurred</span>
+  <span class="n">subscriptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">downEventsObservable</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span>
+      <span class="n">view</span><span class="o">.</span><span class="na">showCircle</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">Color</span><span class="o">.</span><span class="na">RED</span><span class="o">)));</span>
+  <span class="c1">// Show a blue circle at the position where the up event ocurred</span>
+  <span class="n">subscriptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">upEventsObservable</span><span class="o">.</span><span class="na">subscribe</span><span class="o">(</span><span class="n">event</span> <span class="o">-&gt;</span>
+      <span class="n">view</span><span class="o">.</span><span class="na">showCircle</span><span class="o">(</span><span class="n">event</span><span class="o">.</span><span class="na">getX</span><span class="o">(),</span> <span class="n">event</span><span class="o">.</span><span class="na">getY</span><span class="o">(),</span> <span class="n">Color</span><span class="o">.</span><span class="na">BLUE</span><span class="o">)));</span>
+  <span class="c1">// Connect the source observable to begin emitting events</span>
+  <span class="n">subscriptions</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">motionEventObservable</span><span class="o">.</span><span class="na">connect</span><span class="o">());</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Observable</strong>를 <strong>subscribe</strong> 해도 바로 이벤트가 방출되지 않고 <strong>ConnectedObservable</strong>의 <strong>connect</strong>를 호출하면 이벤트가 방출되기 시작합니다.</p>
+
+<p><img src="/assets/img/rx-java/image_1.8.gif" alt="image_1.8" /></p>
+
+<p><strong>connect</strong>가 호출되고 난 뒤에는 같은 이벤트의 동일한 순서가 녹색 및 파란색 <strong>Observer</strong>들에게 모두 방출됩니다.</p>
+
+<blockquote>
+  <p>[출처] : https://medium.com/@jagsaund/5-not-so-obvious-things-about-rxjava-c388bd19efbc</p>
+</blockquote>
+</section>
+   
+   <!-- Tag list -->
+  
+  
+
+
+    <footer>
+        <div class="tag-list">
+        
+          <div class="meta">Tags</div>
+        
+            
+        
+          <a class="button" href="/tags#Android">
+            <p><i class="fa fa-tag fa-fw"></i> Android</p>
+          </a>
+        
+          <a class="button" href="/tags#RxJava">
+            <p><i class="fa fa-tag fa-fw"></i> RxJava</p>
+          </a>
+        
+        </div>
+    </footer>
+  
+
+    
+</article>
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dhha22';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+</div>
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/android/2018/02/07/Model-View-ViewModel.html">
+        MVVM 패턴
+      </a>
+  </div>
+  
+  
+</div>
+
+    </div>
+    
+<footer class="site-footer">
+    <p class="text">Copyright ©dhha22. All rights reserved</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+
+
+<li>
+	<a href="mailto:dhha77@gmail.com" title="Email">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/dhha22" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+
+  </body>
+</html>
