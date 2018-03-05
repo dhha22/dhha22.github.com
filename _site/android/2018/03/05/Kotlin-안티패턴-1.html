@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- JQuery (used for bootstrap and jekyll search) -->
+    <script src="/assets/js/jquery-3.2.1.min.js" ></script>
+    
+    <!-- Main JS (navbar.js and katex_init.js)-->
+    <script defer=true src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/android/2018/03/05/Kotlin-%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%90%E1%85%B5%E1%84%91%E1%85%A2%E1%84%90%E1%85%A5%E1%86%AB-1.html">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Tech Blog" href="http://localhost:4000///feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/katex.min.css">
+    <script src="/assets/js/katex.min.js">
+    </script>
+    
+
+    <!-- Google Analytics -->
+    
+    
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Kotlin 안티패턴#1</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Kotlin 안티패턴#1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kotlin 안티 패턴 #1" />
+<meta property="og:description" content="Kotlin 안티 패턴 #1" />
+<link rel="canonical" href="http://localhost:4000/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html" />
+<meta property="og:url" content="http://localhost:4000/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-05T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"Kotlin 안티 패턴 #1","@type":"BlogPosting","url":"http://localhost:4000/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html","headline":"Kotlin 안티패턴#1","dateModified":"2018-03-05T00:00:00+09:00","datePublished":"2018-03-05T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Manual seo tags -->
+    <!--
+    <title>Kotlin 안티패턴#1 | Tech Blog</title>
+    <meta name="description" content="Kotlin 안티 패턴 #1">
+    -->
+</head>
+
+  <body>
+    <header class="site-header">
+    
+    <!-- Logo and title -->
+	<div class="branding">
+		<a href="/">
+			<img class="avatar" src="/assets/img/my_profile.png" alt=""/>
+		</a>
+
+		<h1 class="site-title">
+			<a href="/">Tech Blog</a>
+		</h1>
+	</div>
+    
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+    
+    <!-- Menu -->
+    <ul>
+        
+        
+        
+        
+        
+        
+        <li>
+            <a class="clear" href="/about/">
+                About
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        <li>
+            <a class="clear" href="http://localhost:4000/search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a class="clear" href="http://localhost:4000/tags">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+    </ul>
+        
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="background-image: url('/')">
+    <h1 id="Kotlin+%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4%231" class="title">Kotlin 안티패턴#1</h1>
+    <p class="meta">
+    March 5, 2018
+    
+    </p>
+  </header>
+  <section class="post-content"><h2 id="kotlin-안티-패턴-1">Kotlin 안티 패턴 #1</h2>
+
+<blockquote>
+  <p>해당 글은 Droid Kaigi 2018에서 발표했던 Kotlinアンチパターン을 번역한 글입니다.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="kotin-안티패턴-1-에서-다뤄-볼-주제">Kotin 안티패턴 #1 에서 다뤄 볼 주제</h3>
+
+<ul>
+  <li>
+    <p>lateInit 과 null 초기화</p>
+  </li>
+  <li>
+    <p>Scope 함수</p>
+  </li>
+  <li>
+    <p>Nullable 과 NonNull</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="lateinit-과-null-초기화">lateinit 과 null 초기화</h3>
+
+<h4 id="lateinit에-대해">lateinit에 대해</h4>
+
+<p>Java에서는 초기값을 설정하지 않고 변수 선언을 했을 경우 <strong>null</strong> 이 들어갑니다.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">TextView</span> <span class="n">message</span><span class="o">;</span>	<span class="c1">// null 이 들어갑니다.</span>
+</code></pre></div></div>
+
+<p>Kotlin에서는 기본적으로 초기값을 설정하지 않으면 안됩니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">message</span><span class="p">:</span> <span class="n">TextView</span>	<span class="c1">// error가 발생됩니다.</span>
+<span class="kd">var</span> <span class="py">message</span><span class="p">:</span> <span class="n">TextView</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>	<span class="c1">// OK</span>
+</code></pre></div></div>
+
+<p>Android에서는 onCreate() 이후로 초기화 하는것이 많습니다.</p>
+
+<p>Kotlin에서 <strong>초기값을 설정하는게 필수</strong>입니다.</p>
+
+<p>아래 예시는 TextView를 null 로 초기화 하였기 때문에</p>
+
+<p>실질적으로 <strong>NonNull</strong>이었던 부분이 전부 <strong>Nullable</strong>로 되어버립니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">message</span><span class="p">:</span> <span class="n">TextView</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+<span class="k">fun</span> <span class="n">clear</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">message</span><span class="o">!!</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span><span class="s">""</span>
+  <span class="n">message</span><span class="o">?.</span><span class="n">text</span> <span class="p">=</span> <span class="s">""</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Kotlin에서 초기값을 설정하는게 필수지만 <strong>lateinit</strong>을 사용하면 선언할 때 초기값을 넣지 않아도 됩니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lateinit</span> <span class="kd">var</span> <span class="py">message</span><span class="p">:</span> <span class="n">TextView</span>	<span class="c1">// OK</span>
+</code></pre></div></div>
+
+<p>단 값을 초기화 하지 않은 상태에서 해당 값을 참조하게 되면 <strong>UninitializedPropertyAccessException</strong>이 발생됩니다.</p>
+
+<hr />
+
+<h4 id="lateinit을-사용하는-곳">lateinit을 사용하는 곳</h4>
+
+<p>인스턴스 생성할 때 값이 정해지지 않았지만 onCreate(), onCreateView()에 대입해야할 경우 사용하면 됩니다.</p>
+
+<p>예시)</p>
+
+<ul>
+  <li>findViewById를 한 View</li>
+  <li>DataBinding의 binding</li>
+  <li>Dagger등의 DI에 의해 inject 될 것</li>
+</ul>
+
+<p>단 <strong>원시 타입</strong>(int, float, long, …)이나 <strong>Nullable</strong>에는 <strong>lateinit</strong>을 사용할 수 없습니다.</p>
+
+<hr />
+
+<h4 id="lateinit-안티패턴">lateinit 안티패턴</h4>
+
+<p>통신 후 얻는 정보를 <strong>lateinit</strong>로 할 경우</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lateinit</span> <span class="kd">var</span> <span class="py">profile</span><span class="p">:</span> <span class="n">Profile</span>
+
+<span class="k">fun</span> <span class="n">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">fetchProfile</span><span class="p">().</span><span class="n">subscribe</span> <span class="p">{</span> <span class="n">profile</span> <span class="p">-&gt;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">profile</span> <span class="p">=</span> <span class="n">profile</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>미리 listener를 설정하면</p>
+
+<p>통신 중이거나 통신 에러시에 접속해 <strong>UninitializedPropertyAccessException</strong>이 발생됩니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">button</span><span class="p">.</span><span class="n">setOnClickListener</span> <span class="p">{</span>
+    <span class="n">textView</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="n">profile</span><span class="p">.</span><span class="n">name</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="해결방법">해결방법</h4>
+
+<p><strong>Nullable</strong>로 하고 항상 “값을 못받았을 경우 어떻게 할까?” 라는 생각을 하는게 좋습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">profile</span><span class="p">:</span> <span class="n">Profile</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>	<span class="c1">// Nullable 설정</span>
+<span class="k">fun</span> <span class="n">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">fetchProfile</span><span class="p">().</span><span class="n">subscribe</span> <span class="p">{</span> <span class="n">profile</span> <span class="p">-&gt;</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">profile</span> <span class="p">=</span> <span class="n">profile</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>onCreate() / onCreateView() 에서 초기화가 가능한다면 <strong>lateinit</strong>을 사용해도 됩니다.</p>
+
+<p>onCreate() / onCreateView() 이후에 값이 정해지면 Nullable로 하거나 멤버 변수를 사용하는것을 피하시는게 좋습니다.</p>
+
+<hr />
+
+<h4 id="isinitialized">isInitialized</h4>
+
+<p>Kotlin 1.2부터 <strong>isInitialized</strong>가 추가되었습니다.</p>
+
+<p>값이 대입되었는지 여부를 확인 할 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lateinit</span> <span class="kd">var</span> <span class="py">str</span><span class="p">:</span> <span class="n">String</span>
+
+<span class="k">fun</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">val</span> <span class="py">before</span> <span class="p">=</span> <span class="o">::</span><span class="n">str</span><span class="p">.</span><span class="n">isInitialized</span>	<span class="c1">// false</span>
+    <span class="n">str</span> <span class="p">=</span> <span class="s">"hello"</span>
+    <span class="kd">val</span> <span class="py">after</span> <span class="p">=</span> <span class="o">::</span><span class="n">str</span><span class="p">.</span><span class="n">isInitialized</span>		<span class="c1">// true</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>isinitialized는 원래 테스트 코드에서 이용하려고 추가되었습니다.</p>
+
+<p>isInitialized를 일상적으로 사용하면 더이상 null이 안전하지 않으므로 프로덕션 코드에서 사용 안하시는게 좋습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="k">lateinit</span> <span class="kd">var</span> <span class="py">file</span><span class="p">:</span> <span class="n">File</span>
+
+<span class="n">@After</span>
+<span class="k">fun</span> <span class="n">tearDown</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 파일 만들기 전에 fail하면 에러가 발생</span>
+    <span class="n">file</span><span class="p">.</span><span class="n">delete</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="scope-함수">Scope 함수</h3>
+
+<p>scope 함수 종류에는 let/ run/ also/ apply/ with 5개가 있습니다.</p>
+
+<p>with를 제외하면 대략적 다음과 같이 분류 할 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">반환값</span> <span class="p">=</span> <span class="err">자신</span><span class="p">.</span><span class="n">scope</span><span class="err">함수</span> <span class="p">{</span>
+    <span class="err">리시버</span><span class="p">.</span><span class="n">method</span><span class="p">()</span>
+    <span class="err">결과</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><img src="/assets/img/kotlin/scope_method_1.png" alt="scope_method_1" /></p>
+
+<hr />
+
+<h4 id="scope-함수를-사용하는-곳-1">Scope 함수를 사용하는 곳 #1</h4>
+
+<p>null 관련 제어에 유용합니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span>
+    <span class="c1">//	str이 null이 아닐 경우</span>
+<span class="p">}</span>
+
+<span class="kd">val</span> <span class="py">r</span> <span class="p">=</span> <span class="n">str</span> <span class="o">?:</span> <span class="n">run</span> <span class="p">{</span>
+    <span class="c1">// str이 null인 경우</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="scope-함수를-사용하는-곳-2">Scope 함수를 사용하는 곳 #2</h4>
+
+<p>초기화 처리를 정리하고 싶을 경우 사용하면 좋습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">intent</span> <span class="p">=</span> <span class="n">Intent</span><span class="p">().</span><span class="n">apply</span> <span class="p">{</span>
+    <span class="n">putExtra</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span> <span class="s">"value"</span><span class="p">)</span>
+    <span class="n">putExtra</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span> <span class="s">"value"</span><span class="p">)</span>
+    <span class="n">putExtra</span><span class="p">(</span><span class="s">"key"</span><span class="p">,</span> <span class="s">"value"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="scope-함수-안티패턴">Scope 함수 안티패턴</h4>
+
+<p>apply 범위 내에서 프로퍼티 접근 형식을 사용할 때</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="n">button</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">"hello"</span>	<span class="c1">// Java의 setText(..)가 호출됨</span>
+<span class="c1">// ... button의 설정이 이어짐 ...</span>
+
+<span class="err">↓</span> <span class="n">apply</span><span class="err">를</span> <span class="err">사용하여</span> <span class="err">설정을</span> <span class="err">정리</span>
+
+<span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
+    <span class="n">text</span> <span class="p">=</span> <span class="s">"hello"</span>
+    <span class="c1">// ... button의 설정이 이어짐 ... </span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>로컬 변수를 정의하면 접근 범위가 바뀝니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="py">text</span> <span class="p">=</span> <span class="s">""</span>	<span class="c1">// text 라는 변수가 추가 될 경우</span>
+    <span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
+        <span class="n">text</span> <span class="p">=</span> <span class="s">"hello"</span>
+    <span class="p">}</span>
+    <span class="n">button</span><span class="p">.</span><span class="n">text</span>	<span class="c1">// "hello" 가 되지 않음</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="해결방법-1">해결방법 #1</h4>
+
+<p>apply 범위 내에서는 프로퍼티 접근 형식을 사용하지 않고 일반 함수를 호출하는 방법</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
+    <span class="n">setText</span><span class="p">(</span><span class="s">"hello"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>단 로컬 함수(setText와 이름이 동일한 함수) 가 정의되어 있을 경우 같은 문제가 발생합니다.</p>
+
+<h4 id="해결방법-2">해결방법 #2</h4>
+
+<p>this를 필수로 사용하는 방법 (also와 비슷한 느낌)</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">apply</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">"hello"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="해결방법-3">해결방법 #3</h4>
+
+<p>apply를 사용하는 대신 also를 사용하는 방법</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">context</span><span class="p">).</span><span class="n">also</span> <span class="p">{</span>
+    <span class="n">it</span><span class="p">.</span><span class="n">text</span> <span class="p">=</span> <span class="s">"hello"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="nullable-과-nonnull">Nullable 과 NonNull</h3>
+
+<p>Nullable/ NonNull은 Kotlin의 큰 매력 중 하나 입니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">nullable</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>	<span class="c1">// OK</span>
+<span class="kd">val</span> <span class="py">nonNull</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="k">null</span>	<span class="c1">// 잘못됨</span>
+
+<span class="n">nullable</span><span class="p">.</span><span class="n">length</span>	<span class="c1">// 잘못됨</span>
+<span class="n">nullable</span><span class="o">!!</span><span class="p">.</span><span class="n">length</span>	<span class="c1">// OK</span>
+<span class="n">nullable</span><span class="o">?.</span><span class="n">length</span>	<span class="c1">// OK</span>
+<span class="n">nonNull</span><span class="p">.</span><span class="n">length</span>	<span class="c1">// OK</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="nullable-과-nonnull-안티패턴-1">Nullable 과 NonNull 안티패턴 #1</h4>
+
+<p>Nullable 그대로 데이터를 사용하게 되면</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">User</span><span class="p">(</span>
+    <span class="kd">val</span> <span class="py">id</span><span class="p">:</span> <span class="n">Long</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span>
+    <span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span>
+    <span class="kd">val</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>Nullable 데이터를 사용할 때 곳곳에서 null 체크를 하거나 safe call를 하는 처지가 됩니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">return</span> <span class="n">team</span><span class="o">?.</span><span class="n">user</span><span class="o">?.</span><span class="n">name</span><span class="o">?.</span><span class="n">length</span>
+</code></pre></div></div>
+
+<p>→ 실질적으로 조건 분기가 늘어나 파악하기 어려워 집니다.</p>
+
+<p>→ “뭐가 null이 였지?”에 대해 매번 생각하게 됩니다.</p>
+
+<h4 id="nullable-과-nonnull-안티패턴-2">Nullable 과 NonNull 안티패턴 #2</h4>
+
+<p>모든 변수를 NonNull로 하기 위해 잘못된 데이터를 집어 넣으면</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">response</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+
+<span class="k">return</span> <span class="n">User</span><span class="p">(</span>
+    <span class="n">id</span> <span class="p">=</span> <span class="n">respon</span><span class="p">.</span><span class="n">id</span> <span class="o">?:</span> <span class="m">0L</span><span class="p">,</span>
+    <span class="n">name</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">orEmpty</span><span class="p">(),</span>
+    <span class="n">age</span> <span class="p">=</span> <span class="n">response</span><span class="p">.</span><span class="n">age</span> <span class="o">?:</span> <span class="m">0</span>
+<span class="p">)</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// 골치 아픔 or 잊어버림</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>→ 잘못된 데이터인지 확인하는 처지가 됩니다.</p>
+
+<p>→ 체크를 잊어 오류가 생깁니다.</p>
+
+<hr />
+
+<h4 id="해결방법-1">해결방법</h4>
+
+<p>“null이 무엇을 나타내는지” 로 처리하는 레이어를 정해야합니다.</p>
+
+<ul>
+  <li>API에서 전달해주지 않았기 때문 → API 레이어에서 처리</li>
+  <li>사용자가 설정하지 않았기 때문 → UI 레이어에서 처리</li>
+  <li>명백하지 않고 레이어를 넘었을 경우 → 클래스에서 명확화</li>
+</ul>
+
+<p>데이터 표현에 대해 곤란했을 경우 null에 의존하지 않습니다. (예외 던지기, 다른 클래스로 하기 ,…)</p>
+
+<blockquote>
+  <p>[출처] : https://www.slideshare.net/RecruitLifestyle/kotlin-87339759</p>
+</blockquote>
+
+</section>
+   
+   <!-- Tag list -->
+  
+  
+
+
+    <footer>
+        <div class="tag-list">
+        
+          <div class="meta">Tags</div>
+        
+            
+        
+          <a class="button" href="/tags#Android">
+            <p><i class="fa fa-tag fa-fw"></i> Android</p>
+          </a>
+        
+          <a class="button" href="/tags#Kotlin">
+            <p><i class="fa fa-tag fa-fw"></i> Kotlin</p>
+          </a>
+        
+        </div>
+    </footer>
+  
+
+    
+</article>
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dhha22';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+</div>
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/android/2018/02/22/RxJava%E1%84%85%E1%85%B3%E1%86%AF-%E1%84%8C%E1%85%A1%E1%86%AF-%E1%84%83%E1%85%A1%E1%84%85%E1%85%AE%E1%86%AF%E1%84%89%E1%85%AE-%E1%84%8B%E1%85%B5%E1%86%BB%E1%84%82%E1%85%B3%E1%86%AB-5%E1%84%80%E1%85%A1%E1%84%8C%E1%85%B5-Tip.html">
+        RxJava를 잘 다룰수 있는 5가지 Tip
+      </a>
+  </div>
+  
+  
+</div>
+
+    </div>
+    
+<footer class="site-footer">
+    <p class="text">Copyright ©dhha22. All rights reserved</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+
+
+<li>
+	<a href="mailto:dhha77@gmail.com" title="Email">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/dhha22" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+
+  </body>
+</html>
