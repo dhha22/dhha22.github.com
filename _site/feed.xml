@@ -5,7 +5,630 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>안드로이드 기술 블로그 입니다.</description>
-    <pubDate>Thu, 03 May 2018 17:55:57 +0900</pubDate>
+    <pubDate>Fri, 04 May 2018 12:29:56 +0900</pubDate>
+    
+      <item>
+        <title>Kotlin 안티패턴#2</title>
+        <link>/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html</link>
+        <guid isPermaLink="true">/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html</guid>
+        <description>&lt;h2 id=&quot;kotlin-안티-패턴-2&quot;&gt;Kotlin 안티 패턴 #2&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;해당 글은 Droid Kaigi 2018에서 발표했던 Kotlinアンチパターン을 번역한 글입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;kotin-안티패턴-2-에서-다뤄-볼-주제&quot;&gt;Kotin 안티패턴 #2 에서 다뤄 볼 주제&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Data Class&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;interface 와 abstract class&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;lazy 와 custom getter&lt;/li&gt;
+  &lt;li&gt;Fragment 와 lazy&lt;/li&gt;
+  &lt;li&gt;custom getter&lt;/li&gt;
+  &lt;li&gt;custom setter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://dhha22.github.io/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html &quot;&gt;*Kotlin 안티패턴 #1 바로가기&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;data-class&quot;&gt;Data Class&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;equals/ hashCode 및 toString이 override 되어있음&lt;/li&gt;
+  &lt;li&gt;componentN 이나 copy등의 메서드를 제공&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;alice&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Alice&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;alice&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Alice&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;alice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// &quot;User(name=Alice, age=27)&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;py&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alice&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;nextYear&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alice&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;data-class-안티패턴&quot;&gt;Data Class 안티패턴&lt;/h4&gt;
+
+&lt;p&gt;인스턴스 생성을 위한 메서드에서 제약을 보증하고 싶을 경우&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;data class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;companion&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Range&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;minOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maxOf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;data class에는 &lt;strong&gt;copy 메서드&lt;/strong&gt;가 제공됩니다.&lt;/p&gt;
+
+&lt;p&gt;→ 임의의 데이터를 가진 인스턴스 생성 가능&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;illegal&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ↑ Range (min = 3, max = 0)로 되고, 제약이 깨짐&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결-방법&quot;&gt;해결 방법&lt;/h4&gt;
+
+&lt;p&gt;값이 결정되었다라고 해서 data class를 사용하지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;「값의 내부 표현」 == 「클래스에 예상되는 행동」&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;→ 값의 정리에 이름을 붙이고 있을 뿐&lt;/p&gt;
+
+&lt;p&gt;→ data class&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;「값의 내부 표현」 != 「클래스에 예상되는 행동」&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;→ 일반 클래스로 사용하는 편이 좋음&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;interface-와-abstract-class&quot;&gt;interface 와 abstract class&lt;/h3&gt;
+
+&lt;p&gt;Kotlin에서 interface의 디폴트 메서드를 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Java8에도 있었던 기능이지만 안드로이드에서 사용하기 위해서는 &lt;strong&gt;minSdkVersion을 24 이상&lt;/strong&gt;으로 할 필요가 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Downloadable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;download&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 공통 처리 등&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;abstract-class-와-뭐가-다를까&quot;&gt;abstract class 와 뭐가 다를까?&lt;/h4&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;interface&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;abstract class&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;상태&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가질 수 없음&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가지고 있음&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;상속&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;interface&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;class 와 interface&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;다중상속&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가능&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;불가능&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;default method&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;class method&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;final&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;불가능&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가능&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;protected&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;불가능&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;가능&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;interface-와-abstract-class-안티패턴&quot;&gt;interface 와 abstract class 안티패턴&lt;/h4&gt;
+
+&lt;p&gt;Java 때부터 잘 알려져 있던 안티패턴중 하나입니다.&lt;/p&gt;
+
+&lt;p&gt;처리를 공통화 하기 위해 Base 클래스에 여러 메서드를 선언하다 보니 클래스가 점점 비대해 집니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BaseActivity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AppCompatActivityO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;showNetworkError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 에러표시 (에러가 없는 페이지도 있음)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;결국 수천 줄을 가진 클래스가 되고 더이상 걷잡을수 없게 됩니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결방법&quot;&gt;해결방법&lt;/h4&gt;
+
+&lt;p&gt;Java 에서는 상속보다 &lt;strong&gt;위임&lt;/strong&gt;이 더 좋은 방법이라고 말하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;Kotlin에서는 interface의 &lt;strong&gt;디폴트 메서드&lt;/strong&gt;를 사용하는것이 좋습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NetworkErrorView&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 오류에 대한 View 및 새로고침 처리는 자식 클래스에서 제공&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;networkErrorView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onClickReload&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;showNetworkError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 리스너 세팅, 오류 표시 등의 일반적인 처리&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;물론 abstract 클래스가 올바르게 사용되면 「Base 클래스 = 나쁨」 은 아닙니다.&lt;/p&gt;
+
+&lt;h5 id=&quot;abstract-클래스-사용법의-올바른-예&quot;&gt;abstract 클래스 사용법의 올바른 예&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;onCreate 등의 상속 부분에서 처리를 공통화 하고 싶을 경우&lt;/li&gt;
+  &lt;li&gt;클래스 외부 부터 호출하지 않고 싶을 경우&lt;/li&gt;
+  &lt;li&gt;자식 클래스에서 override 당하고싶지 않은 경우&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;디폴트-메서드-구현이-올바른-예&quot;&gt;디폴트 메서드 구현이 올바른 예&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;전술 이외의 처리를 공통화 시키고 싶은 경우&lt;/li&gt;
+  &lt;li&gt;다중 상속하고 싶은 경우, 상태를 가지고 싶은 경우도 &lt;strong&gt;class delegation&lt;/strong&gt;을 사용하면 가능합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultImpl&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultImpl&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IState&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DefaultImpl&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IState&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;abstract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Staet&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IState&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;staet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserModel&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DefaultImpl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IStaet&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;State&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;abstract&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;concrete&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;최상위-함수-및-확장-함수&quot;&gt;최상위 함수 및 확장 함수&lt;/h3&gt;
+
+&lt;h4 id=&quot;최상위-함수&quot;&gt;최상위 함수&lt;/h4&gt;
+
+&lt;p&gt;파일에 직접 함수를 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;throwOrLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Throwable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// 개발은 throw, 릴리즈는 log 전송&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그러면 어디서나 호출 할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;throwOrLog&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;확장함수&quot;&gt;확장함수&lt;/h4&gt;
+
+&lt;p&gt;클래스에 함수를 추가 하는것이 가능합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;DEBUG&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;여기서도 어디서든 호출 할수 있게 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;m&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;최상위-함수-및-확장-함수-안티패턴-1&quot;&gt;최상위 함수 및 확장 함수 안티패턴 #1&lt;/h4&gt;
+
+&lt;p&gt;일반성이 없거나 별로 사용하지 않은 메서드를 추가할 경우&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decorate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;david&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ha&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ↑&quot;decorate &quot;의 의미가 넓고, 다양한 상황에 고려되지 않음&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;최상위-함수-및-확장-함수-안티패턴-2&quot;&gt;최상위 함수 및 확장 함수 안티패턴 #2&lt;/h4&gt;
+
+&lt;p&gt;공식으로 있음직한 이름인데 엉성하게 구현되어 있을 경우&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;'0'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'9'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// ↑ 비어있는 문자열, 음수가 고려되지 않음&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;확장 기능이 편리해서 남발하는 경향&lt;/li&gt;
+  &lt;li&gt;라이브러리 보다 버그가 있을 가능성이 높음&lt;/li&gt;
+  &lt;li&gt;Java로 Util 클래스를 만드는 것과 같은 문제지만 Kotlin 이라고 통상의 함수처럼 보이기에는 피해가 큼&lt;/li&gt;
+  &lt;li&gt;같이 일하는 팀에 개발자가 많으면 특히 문제가 됨&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결-방법-1&quot;&gt;해결 방법&lt;/h4&gt;
+
+&lt;p&gt;팀에서 확장 함수를 만드는 기준을 정렬하고 interface의 기본 구현 범위를 한정합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BookmarkableActivity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bookmark&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 일반적인 bookmark 처리&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+   
+  &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toLabel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;★ $this&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;lazy-와-custom-getter&quot;&gt;lazy 와 custom getter&lt;/h3&gt;
+
+&lt;h4 id=&quot;lazy에-대해서&quot;&gt;lazy에 대해서&lt;/h4&gt;
+
+&lt;p&gt;lazy는 처음 해당 변수에 접근했을때 값이 계산되고 이후 그 값을 반환합니다. (delegated 속성 중 하나)&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getStringExtrat&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;USER_ID&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;일반적인-표현식의-custom-getter&quot;&gt;일반적인 표현식의 custom getter&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;일반적인 대입은 &lt;strong&gt;인스턴스 생성시&lt;/strong&gt;에 계산&lt;/p&gt;
+
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;isAdmin&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ADMIN_ID&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;lazy는 &lt;strong&gt;처음 접근 했을 시&lt;/strong&gt;에 계산&lt;/p&gt;
+
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;isAdmin&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ADMIN_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;custom getter은 &lt;strong&gt;접근 할 때&lt;/strong&gt; 마다 계산&lt;/p&gt;
+
+    &lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;isAdmin&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ADMIN_ID&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;lazy와-custom-getter-안티패턴&quot;&gt;lazy와 custom getter 안티패턴&lt;/h4&gt;
+
+&lt;p&gt;일반적인 대입, lazy, custom getter를 모호하게 구분할 경우&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 충돌한 경우&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 오래된 값이 돌아온 경우&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;area&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 불필요한 계산을 여러번 실행할 경우&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결-방법-2&quot;&gt;해결 방법&lt;/h4&gt;
+
+&lt;p&gt;값의 성질에 따라 적절히 클래스를 나눈다&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;클래스 초기화 시에 값이 확정되고 불변 → 일반 대입&lt;/li&gt;
+  &lt;li&gt;어느 시점을 넘기전 까지 값이 없지만 불변 → lazy&lt;/li&gt;
+  &lt;li&gt;상태가 바뀌면 값이 바뀔 경우 → custom getter&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;delegated-속성&quot;&gt;delegated 속성&lt;/h4&gt;
+
+&lt;p&gt;속성의 get과 set을 다른 클래스에 위임이 가능할 때&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyClass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;→ 일반적인 값으로 보이기 쉬움&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Intent의 extra&lt;/li&gt;
+  &lt;li&gt;Fragement의 arguments&lt;/li&gt;
+  &lt;li&gt;savedInstaneState&lt;/li&gt;
+  &lt;li&gt;SharedPreferences&lt;/li&gt;
+  &lt;li&gt;FirebaseRemoteConfig&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;delegated 속성의 사용 예&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Extra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ReadOnlyProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  	&lt;span class=&quot;n&quot;&gt;thisRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Activity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;*&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thisRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;extras&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;prop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KProperty1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;*,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;putExtra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;prop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ProfileActivity&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AppCompatActivity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Extra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;companion&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;createIntent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ProfileActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      			&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ProfileActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;fragment-와-lazy&quot;&gt;Fragment 와 lazy&lt;/h3&gt;
+
+&lt;p&gt;lazy는 처음 접근할때에 값이 계산되고, 이후 그 값을 캐시하고 반환합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;intent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getStringExtra&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;USER_ID&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;fragment-와-lazy-안티패턴&quot;&gt;Fragment 와 lazy 안티패턴&lt;/h4&gt;
+
+&lt;p&gt;Fragment의 View를 lazy 하는것은 안티패턴입니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lazy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findViewById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Fragment는 같은 인스턴스에서 &lt;strong&gt;onCreateView&lt;/strong&gt;가 다시 불립니다.&lt;/p&gt;
+
+&lt;p&gt;lazy를 사용하면 처음의 view 상태를 계속 유지하기 때문에 &lt;strong&gt;onCreateView&lt;/strong&gt;가 되어도 값이 업데이트 되지 않습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결-방법-3&quot;&gt;해결 방법&lt;/h4&gt;
+
+&lt;p&gt;lateinit을 사용하여 onCreateView에서 대입합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;lateinit&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Button&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onCreateView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;view&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findViewBtId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Data Binding의 경우에도 binding 자체는 lateinit가 좋습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;custom-getter&quot;&gt;custom getter&lt;/h3&gt;
+
+&lt;p&gt;val 과 var의 반환 값을 커스텀하는것이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;문법상, 인수가 없는 함수는 모두 custom getter로 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;userId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;isAdmin&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userId&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ADMIN_ID&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;custom-getter-안티패턴-1&quot;&gt;custom getter 안티패턴 #1&lt;/h4&gt;
+
+&lt;p&gt;값을 가져오는 도중 부작용이 발생합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;itemCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;recyclerView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;initXXX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;// 부작용&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;recyclerView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;adapter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemCount&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;custom-getter-안티패턴-2&quot;&gt;custom getter 안티패턴 #2&lt;/h4&gt;
+
+&lt;p&gt;계산량이 많습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;total&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;countView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;View&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ViewGroup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;until&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;childCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;countView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getChildAt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;it&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;호출 측면에서 일반 변수처럼 보입니다.&lt;/p&gt;
+
+&lt;p&gt;따라서 상태가 변화하거나 계산량이 많은것으로 예상할 수 없어서 버그와 성능 저하를 일으킬 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;itemCount&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// ↑ 위에 처럼 순진하게 접근할 수 도 있음&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결방법-1&quot;&gt;해결방법&lt;/h4&gt;
+
+&lt;p&gt;부작용이 없고 계산 과정이 간단할 경우 → custom getter&lt;/p&gt;
+
+&lt;p&gt;부작용이 있거나 계산량이 많을 경우 →  함수&lt;/p&gt;
+
+&lt;p&gt;위의 분류대로 구현하면 함수 이름보다 명확하게 호출 측이 부작용의 유무와 계산량을 예상할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;custom-setter&quot;&gt;custom setter&lt;/h3&gt;
+
+&lt;p&gt;Kotlin에서 일반 var를 커스텀화 할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;field&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;notifyDataSetChanged&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;custom-setter를-사용하는-곳&quot;&gt;custom setter를 사용하는 곳&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;값을 설정하는 김에 갱신 처리 등을 실시&lt;/li&gt;
+  &lt;li&gt;변수의 위임&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;변수의-위임&quot;&gt;변수의 위임&lt;/h4&gt;
+
+&lt;p&gt;멤버 변수에 위임을 간단하게 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;(이 경우에 backing field가 생성되지 않습니다.)&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;owner&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;ownerName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;owner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;owner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;※ backing field : Java로 변화 했을 경우 생성되는 일반적인 field 입니다.&lt;/p&gt;
+
+&lt;p&gt;다소 중복이 있을 수 있지만 다음과 같이 쓸 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;owner&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;ownerName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;by&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;object&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ReadWriteProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thisRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;*&amp;gt;):&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;owner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fun&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;thisRef&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;*&amp;gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;owner&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;변수의-위임-안티패턴&quot;&gt;변수의 위임 안티패턴&lt;/h4&gt;
+
+&lt;p&gt;예: 값이 업데이트 되면 XXX를 업데이트 하고 YYY에 통지하고 ZZZ 값도 업데이트 해야하는 경우&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;py&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;field&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;updateXXX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;notifyYYY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ZZZ&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;값만 바꿀 수 없습니다 (심지어 클래스 안에서도)&lt;/p&gt;
+
+&lt;p&gt;반영과 계산을 나중에 한꺼번에 하는것은 불가능합니다.&lt;/p&gt;
+
+&lt;p&gt;값을 대입했을 뿐이라고 생각하면 예외의 상황이 발생합니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;해결-방법-4&quot;&gt;해결 방법&lt;/h4&gt;
+
+&lt;p&gt;당연하지만 var의 책임은 값의 유지에 두어야 합니다.&lt;/p&gt;
+
+&lt;p&gt;var는 일반적으로 private으로 가지고 있어야합니다.&lt;/p&gt;
+
+&lt;p&gt;갱신용 함수로 공개하는 편이 var로 표현하는 것 보다 혼란이 적습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[출처] : https://www.slideshare.net/RecruitLifestyle/kotlin-87339759&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</description>
+        <pubDate>Fri, 04 May 2018 00:00:00 +0900</pubDate>
+      </item>
     
       <item>
         <title>Kotlin 안티패턴#1</title>

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- JQuery (used for bootstrap and jekyll search) -->
+    <script src="/assets/js/jquery-3.2.1.min.js" ></script>
+    
+    <!-- Main JS (navbar.js and katex_init.js)-->
+    <script defer=true src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/android/2018/05/04/Kotlin-%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%90%E1%85%B5%E1%84%91%E1%85%A2%E1%84%90%E1%85%A5%E1%86%AB-2.html">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Tech Blog" href="http://localhost:4000///feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/katex.min.css">
+    <script src="/assets/js/katex.min.js">
+    </script>
+    
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-114727309-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    
+    
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Kotlin 안티패턴#2</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Kotlin 안티패턴#2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Kotlin 안티 패턴 #2" />
+<meta property="og:description" content="Kotlin 안티 패턴 #2" />
+<link rel="canonical" href="http://localhost:4000/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html" />
+<meta property="og:url" content="http://localhost:4000/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-05-04T00:00:00+09:00" />
+<script type="application/ld+json">
+{"description":"Kotlin 안티 패턴 #2","@type":"BlogPosting","url":"http://localhost:4000/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html","headline":"Kotlin 안티패턴#2","dateModified":"2018-05-04T00:00:00+09:00","datePublished":"2018-05-04T00:00:00+09:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Manual seo tags -->
+    <!--
+    <title>Kotlin 안티패턴#2 | Tech Blog</title>
+    <meta name="description" content="Kotlin 안티 패턴 #2">
+    -->
+</head>
+
+  <body>
+    <header class="site-header">
+    
+    <!-- Logo and title -->
+	<div class="branding">
+		<a href="/">
+			<img class="avatar" src="/assets/img/my_profile.png" alt=""/>
+		</a>
+
+		<h1 class="site-title">
+			<a href="/">Tech Blog</a>
+		</h1>
+	</div>
+    
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+    
+    <!-- Menu -->
+    <ul>
+        
+        
+        
+        
+        
+        
+        <li>
+            <a class="clear" href="/about/">
+                About
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        <li>
+            <a class="clear" href="http://localhost:4000/search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+        <li>
+            <a class="clear" href="http://localhost:4000/tags">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+    </ul>
+        
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="background-image: url('/')">
+    <h1 id="Kotlin+%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4%232" class="title">Kotlin 안티패턴#2</h1>
+    <p class="meta">
+    May 4, 2018
+    
+    </p>
+  </header>
+  <section class="post-content"><h2 id="kotlin-안티-패턴-2">Kotlin 안티 패턴 #2</h2>
+
+<blockquote>
+  <p>해당 글은 Droid Kaigi 2018에서 발표했던 Kotlinアンチパターン을 번역한 글입니다.</p>
+</blockquote>
+
+<hr />
+
+<h3 id="kotin-안티패턴-2-에서-다뤄-볼-주제">Kotin 안티패턴 #2 에서 다뤄 볼 주제</h3>
+
+<ul>
+  <li>
+    <p>Data Class</p>
+  </li>
+  <li>
+    <p>interface 와 abstract class</p>
+  </li>
+  <li>lazy 와 custom getter</li>
+  <li>Fragment 와 lazy</li>
+  <li>custom getter</li>
+  <li>custom setter</li>
+</ul>
+
+<p><a href="https://dhha22.github.io/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html ">*Kotlin 안티패턴 #1 바로가기</a></p>
+
+<hr />
+
+<h3 id="data-class">Data Class</h3>
+
+<ul>
+  <li>equals/ hashCode 및 toString이 override 되어있음</li>
+  <li>componentN 이나 copy등의 메서드를 제공</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">User</span><span class="p">(</span><span class="kd">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="kd">val</span> <span class="py">age</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span>
+
+<span class="kd">val</span> <span class="py">alice</span> <span class="p">=</span> <span class="n">User</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span> <span class="m">27</span><span class="p">)</span>
+<span class="n">alice</span> <span class="p">==</span> <span class="n">User</span><span class="p">(</span><span class="s">"Alice"</span><span class="p">,</span> <span class="m">27</span><span class="p">)</span>	<span class="c1">// true</span>
+<span class="n">alice</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span>	<span class="c1">// "User(name=Alice, age=27)"</span>
+<span class="kd">val</span> <span class="err">(</span><span class="py">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="p">=</span> <span class="n">alice</span>
+<span class="kd">val</span> <span class="py">nextYear</span> <span class="p">=</span> <span class="n">alice</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">age</span> <span class="p">=</span> <span class="m">28</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="data-class-안티패턴">Data Class 안티패턴</h4>
+
+<p>인스턴스 생성을 위한 메서드에서 제약을 보증하고 싶을 경우</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">data class</span> <span class="nc">Range</span><span class="p">(</span><span class="kd">val</span> <span class="py">min</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="kd">val</span> <span class="py">max</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="n">getRange</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Int</span><span class="p">)</span> <span class="p">:</span> <span class="n">Range</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">Range</span><span class="p">(</span><span class="n">minOf</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="n">maxOf</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>data class에는 <strong>copy 메서드</strong>가 제공됩니다.</p>
+
+<p>→ 임의의 데이터를 가진 인스턴스 생성 가능</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">range</span> <span class="p">=</span> <span class="n">Range</span><span class="p">.</span><span class="n">getRange</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
+<span class="kd">val</span> <span class="py">illegal</span> <span class="p">=</span> <span class="n">range</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">max</span> <span class="p">=</span> <span class="m">0</span><span class="p">)</span>
+<span class="c1">// ↑ Range (min = 3, max = 0)로 되고, 제약이 깨짐</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="해결-방법">해결 방법</h4>
+
+<p>값이 결정되었다라고 해서 data class를 사용하지 않습니다.</p>
+
+<p><strong>「값의 내부 표현」 == 「클래스에 예상되는 행동」</strong></p>
+
+<p>→ 값의 정리에 이름을 붙이고 있을 뿐</p>
+
+<p>→ data class</p>
+
+<p><strong>「값의 내부 표현」 != 「클래스에 예상되는 행동」</strong></p>
+
+<p>→ 일반 클래스로 사용하는 편이 좋음</p>
+
+<hr />
+
+<h3 id="interface-와-abstract-class">interface 와 abstract class</h3>
+
+<p>Kotlin에서 interface의 디폴트 메서드를 사용할 수 있습니다.</p>
+
+<p>Java8에도 있었던 기능이지만 안드로이드에서 사용하기 위해서는 <strong>minSdkVersion을 24 이상</strong>으로 할 필요가 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">Downloadable</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="n">download</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 공통 처리 등</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="abstract-class-와-뭐가-다를까">abstract class 와 뭐가 다를까?</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">interface</th>
+      <th style="text-align: center">abstract class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">상태</td>
+      <td style="text-align: center">가질 수 없음</td>
+      <td style="text-align: center">가지고 있음</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">상속</td>
+      <td style="text-align: center">interface</td>
+      <td style="text-align: center">class 와 interface</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">다중상속</td>
+      <td style="text-align: center">가능</td>
+      <td style="text-align: center">불가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">default method</th>
+      <th style="text-align: center">class method</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">final</td>
+      <td style="text-align: center">불가능</td>
+      <td style="text-align: center">가능</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">protected</td>
+      <td style="text-align: center">불가능</td>
+      <td style="text-align: center">가능</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h4 id="interface-와-abstract-class-안티패턴">interface 와 abstract class 안티패턴</h4>
+
+<p>Java 때부터 잘 알려져 있던 안티패턴중 하나입니다.</p>
+
+<p>처리를 공통화 하기 위해 Base 클래스에 여러 메서드를 선언하다 보니 클래스가 점점 비대해 집니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">abstract</span> <span class="kd">class</span> <span class="nc">BaseActivity</span> <span class="p">:</span> <span class="n">AppCompatActivityO</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">protected</span> <span class="k">fun</span> <span class="n">showNetworkError</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 에러표시 (에러가 없는 페이지도 있음)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>결국 수천 줄을 가진 클래스가 되고 더이상 걷잡을수 없게 됩니다.</p>
+
+<hr />
+
+<h4 id="해결방법">해결방법</h4>
+
+<p>Java 에서는 상속보다 <strong>위임</strong>이 더 좋은 방법이라고 말하고 있습니다.</p>
+
+<p>Kotlin에서는 interface의 <strong>디폴트 메서드</strong>를 사용하는것이 좋습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">NetworkErrorView</span> <span class="p">{</span>
+  <span class="c1">// 오류에 대한 View 및 새로고침 처리는 자식 클래스에서 제공</span>
+  <span class="kd">val</span> <span class="py">networkErrorView</span><span class="p">:</span> <span class="n">View</span>
+  <span class="k">fun</span> <span class="n">onClickReload</span><span class="p">()</span>
+  
+  <span class="k">fun</span> <span class="n">showNetworkError</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 리스너 세팅, 오류 표시 등의 일반적인 처리</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>물론 abstract 클래스가 올바르게 사용되면 「Base 클래스 = 나쁨」 은 아닙니다.</p>
+
+<h5 id="abstract-클래스-사용법의-올바른-예">abstract 클래스 사용법의 올바른 예</h5>
+
+<ul>
+  <li>onCreate 등의 상속 부분에서 처리를 공통화 하고 싶을 경우</li>
+  <li>클래스 외부 부터 호출하지 않고 싶을 경우</li>
+  <li>자식 클래스에서 override 당하고싶지 않은 경우</li>
+</ul>
+
+<h5 id="디폴트-메서드-구현이-올바른-예">디폴트 메서드 구현이 올바른 예</h5>
+
+<ul>
+  <li>전술 이외의 처리를 공통화 시키고 싶은 경우</li>
+  <li>다중 상속하고 싶은 경우, 상태를 가지고 싶은 경우도 <strong>class delegation</strong>을 사용하면 가능합니다.</li>
+</ul>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserModel</span><span class="p">()</span> <span class="p">:</span> <span class="n">DefaultImpl</span> <span class="k">by</span> <span class="n">State</span><span class="p">()</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="kd">class</span> <span class="nc">UserModel</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="p">:</span> <span class="n">DefaultImpl</span> <span class="k">by</span> <span class="n">s</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">IState</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="py">state</span><span class="p">:</span> <span class="n">String</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span> <span class="nc">DefaultImpl</span> <span class="p">:</span> <span class="n">IState</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="k">abstract</span><span class="p">()</span> <span class="p">:</span> <span class="n">String</span>
+  <span class="k">fun</span> <span class="n">default</span><span class="p">()</span> <span class="p">{</span> <span class="o">..</span><span class="p">.</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">Staet</span> <span class="p">:</span> <span class="n">IState</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="kd">var</span> <span class="py">staet</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">""</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nc">UserModel</span> <span class="p">:</span> <span class="n">DefaultImpl</span><span class="p">,</span> <span class="n">IStaet</span> <span class="k">by</span> <span class="n">State</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="k">fun</span> <span class="k">abstract</span><span class="p">()</span> <span class="p">:</span> <span class="n">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s">"concrete"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="최상위-함수-및-확장-함수">최상위 함수 및 확장 함수</h3>
+
+<h4 id="최상위-함수">최상위 함수</h4>
+
+<p>파일에 직접 함수를 쓸 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">throwOrLog</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">Throwable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// 개발은 throw, 릴리즈는 log 전송</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>그러면 어디서나 호출 할 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">throwOrLog</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="확장함수">확장함수</h4>
+
+<p>클래스에 함수를 추가 하는것이 가능합니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">Any</span><span class="o">?.</span><span class="n">log</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Log</span><span class="p">.</span><span class="n">d</span><span class="p">(</span><span class="s">"DEBUG"</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="n">toString</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>여기서도 어디서든 호출 할수 있게 됩니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">foo</span><span class="p">()</span> <span class="p">{</span>
+  <span class="m">123</span><span class="p">.</span><span class="n">log</span><span class="p">()</span>
+  <span class="s">"hello"</span><span class="p">.</span><span class="n">log</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="최상위-함수-및-확장-함수-안티패턴-1">최상위 함수 및 확장 함수 안티패턴 #1</h4>
+
+<p>일반성이 없거나 별로 사용하지 않은 메서드를 추가할 경우</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">String</span><span class="p">.</span><span class="n">decorate</span><span class="p">()</span> <span class="p">=</span> <span class="s">"david"</span><span class="p">+</span><span class="err">$</span><span class="k">this</span><span class="p">+</span><span class="s">"ha"</span>
+<span class="c1">// ↑"decorate "의 의미가 넓고, 다양한 상황에 고려되지 않음</span>
+</code></pre></div></div>
+
+<h4 id="최상위-함수-및-확장-함수-안티패턴-2">최상위 함수 및 확장 함수 안티패턴 #2</h4>
+
+<p>공식으로 있음직한 이름인데 엉성하게 구현되어 있을 경우</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">fun</span> <span class="n">String</span><span class="p">.</span><span class="n">isInteger</span><span class="p">()</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">all</span> <span class="p">{</span> <span class="n">it</span> <span class="k">in</span> <span class="sc">'0'</span><span class="o">..</span><span class="sc">'9'</span> <span class="p">}</span>
+<span class="c1">// ↑ 비어있는 문자열, 음수가 고려되지 않음</span>
+</code></pre></div></div>
+
+<ul>
+  <li>확장 기능이 편리해서 남발하는 경향</li>
+  <li>라이브러리 보다 버그가 있을 가능성이 높음</li>
+  <li>Java로 Util 클래스를 만드는 것과 같은 문제지만 Kotlin 이라고 통상의 함수처럼 보이기에는 피해가 큼</li>
+  <li>같이 일하는 팀에 개발자가 많으면 특히 문제가 됨</li>
+</ul>
+
+<hr />
+
+<h4 id="해결-방법-1">해결 방법</h4>
+
+<p>팀에서 확장 함수를 만드는 기준을 정렬하고 interface의 기본 구현 범위를 한정합니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">BookmarkableActivity</span> <span class="p">{</span>
+  <span class="k">fun</span> <span class="n">bookmark</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 일반적인 bookmark 처리</span>
+  <span class="p">}</span>
+   
+  <span class="k">fun</span> <span class="n">String</span><span class="p">.</span><span class="n">toLabel</span><span class="p">()</span> <span class="p">=</span> <span class="s">"★ $this"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="lazy-와-custom-getter">lazy 와 custom getter</h3>
+
+<h4 id="lazy에-대해서">lazy에 대해서</h4>
+
+<p>lazy는 처음 해당 변수에 접근했을때 값이 계산되고 이후 그 값을 반환합니다. (delegated 속성 중 하나)</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">userId</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+  <span class="n">intent</span><span class="p">.</span><span class="n">getStringExtrat</span><span class="p">(</span><span class="s">"USER_ID"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="일반적인-표현식의-custom-getter">일반적인 표현식의 custom getter</h4>
+
+<ul>
+  <li>
+    <p>일반적인 대입은 <strong>인스턴스 생성시</strong>에 계산</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">isAdmin</span> <span class="p">=</span> <span class="n">userId</span> <span class="p">==</span> <span class="n">ADMIN_ID</span>
+</code></pre></div>    </div>
+
+    <p>​</p>
+  </li>
+  <li>
+    <p>lazy는 <strong>처음 접근 했을 시</strong>에 계산</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">isAdmin</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">userId</span> <span class="p">==</span> <span class="n">ADMIN_ID</span><span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>​</p>
+  </li>
+  <li>
+    <p>custom getter은 <strong>접근 할 때</strong> 마다 계산</p>
+
+    <div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">isAdmin</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">userId</span> <span class="p">==</span> <span class="n">ADMIN_ID</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<hr />
+
+<h4 id="lazy와-custom-getter-안티패턴">lazy와 custom getter 안티패턴</h4>
+
+<p>일반적인 대입, lazy, custom getter를 모호하게 구분할 경우</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 충돌한 경우</span>
+<span class="k">private</span> <span class="kd">val</span> <span class="py">button</span> <span class="p">=</span> <span class="n">findViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">button</span><span class="p">)</span>
+
+<span class="c1">// 오래된 값이 돌아온 경우</span>
+<span class="kd">val</span> <span class="py">area</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span> <span class="n">width</span> <span class="p">*</span> <span class="n">height</span> <span class="p">}</span>
+
+<span class="c1">// 불필요한 계산을 여러번 실행할 경우</span>
+<span class="kd">val</span> <span class="py">user</span><span class="p">:</span> <span class="n">User</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">User</span><span class="p">(</span><span class="n">userID</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="해결-방법-2">해결 방법</h4>
+
+<p>값의 성질에 따라 적절히 클래스를 나눈다</p>
+
+<ul>
+  <li>클래스 초기화 시에 값이 확정되고 불변 → 일반 대입</li>
+  <li>어느 시점을 넘기전 까지 값이 없지만 불변 → lazy</li>
+  <li>상태가 바뀌면 값이 바뀔 경우 → custom getter</li>
+</ul>
+
+<hr />
+
+<h4 id="delegated-속성">delegated 속성</h4>
+
+<p>속성의 get과 set을 다른 클래스에 위임이 가능할 때</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">userId</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="n">MyClass</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>→ 일반적인 값으로 보이기 쉬움</p>
+
+<ul>
+  <li>Intent의 extra</li>
+  <li>Fragement의 arguments</li>
+  <li>savedInstaneState</li>
+  <li>SharedPreferences</li>
+  <li>FirebaseRemoteConfig</li>
+</ul>
+
+<p>delegated 속성의 사용 예</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Extra</span><span class="p">&lt;</span><span class="k">out</span> <span class="n">T</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">ReadOnlyProperty</span><span class="p">&lt;</span><span class="n">Activity</span><span class="p">,</span> <span class="n">T</span><span class="p">&gt;</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="k">fun</span> <span class="n">getValue</span><span class="p">(</span>
+  	<span class="n">thisRef</span><span class="p">:</span><span class="n">Activity</span><span class="p">,</span>
+    <span class="n">property</span><span class="p">:</span> <span class="n">KProperty</span><span class="p">&lt;*&gt;</span>
+  <span class="p">):</span> <span class="n">T</span> <span class="p">=</span> <span class="n">thisRef</span><span class="p">.</span><span class="n">intent</span><span class="p">.</span><span class="n">extras</span><span class="p">.</span><span class="k">get</span><span class="p">(</span><span class="n">property</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">T</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="n">Intent</span><span class="p">.</span><span class="n">put</span><span class="p">(</span>
+  <span class="n">prop</span><span class="p">:</span> <span class="n">KProperty1</span><span class="p">&lt;*,</span> <span class="n">String</span><span class="p">&gt;,</span> <span class="n">value</span><span class="p">:</span> <span class="n">String</span>
+<span class="p">):</span> <span class="n">Intent</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">putExtra</span><span class="p">(</span><span class="n">prop</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ProfileActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">userId</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="n">Extra</span><span class="p">()</span>
+  
+  <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+    <span class="k">fun</span> <span class="n">createIntent</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">userId</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">Intent</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">Intent</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">ProfileActivity</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+      			<span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">ProfileActivity</span><span class="o">::</span><span class="n">userId</span><span class="p">,</span> <span class="n">userId</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="fragment-와-lazy">Fragment 와 lazy</h3>
+
+<p>lazy는 처음 접근할때에 값이 계산되고, 이후 그 값을 캐시하고 반환합니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">userId</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+  <span class="n">intent</span><span class="p">.</span><span class="n">getStringExtra</span><span class="p">(</span><span class="s">"USER_ID"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="fragment-와-lazy-안티패턴">Fragment 와 lazy 안티패턴</h4>
+
+<p>Fragment의 View를 lazy 하는것은 안티패턴입니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">val</span> <span class="py">button</span> <span class="k">by</span> <span class="n">lazy</span> <span class="p">{</span>
+  <span class="n">view</span><span class="o">!!</span><span class="p">.</span><span class="n">findViewById</span><span class="p">&lt;</span><span class="n">Button</span><span class="p">&gt;(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">button</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Fragment는 같은 인스턴스에서 <strong>onCreateView</strong>가 다시 불립니다.</p>
+
+<p>lazy를 사용하면 처음의 view 상태를 계속 유지하기 때문에 <strong>onCreateView</strong>가 되어도 값이 업데이트 되지 않습니다.</p>
+
+<hr />
+
+<h4 id="해결-방법-3">해결 방법</h4>
+
+<p>lateinit을 사용하여 onCreateView에서 대입합니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">lateinit</span> <span class="kd">var</span> <span class="py">button</span><span class="p">:</span> <span class="n">Button</span>
+
+<span class="k">override</span> <span class="k">fun</span> <span class="n">onCreateView</span><span class="p">(</span><span class="o">..</span><span class="p">.):</span> <span class="n">View</span><span class="p">?</span> <span class="p">{</span>
+  <span class="kd">val</span> <span class="py">view</span> <span class="p">=</span> <span class="o">..</span><span class="p">.</span>
+  <span class="n">button</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">findViewBtId</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">.</span><span class="n">button</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">view</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Data Binding의 경우에도 binding 자체는 lateinit가 좋습니다.</p>
+
+<hr />
+
+<h3 id="custom-getter">custom getter</h3>
+
+<p>val 과 var의 반환 값을 커스텀하는것이 가능합니다.</p>
+
+<p>문법상, 인수가 없는 함수는 모두 custom getter로 됩니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">userId</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">""</span>
+<span class="kd">val</span> <span class="py">isAdmin</span> <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">userId</span> <span class="p">==</span> <span class="n">ADMIN_ID</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="custom-getter-안티패턴-1">custom getter 안티패턴 #1</h4>
+
+<p>값을 가져오는 도중 부작용이 발생합니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">itemCount</span><span class="p">:</span> <span class="n">Int</span>
+<span class="k">get</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">initXXX</span><span class="p">()</span>	<span class="c1">// 부작용</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="n">recyclerView</span><span class="p">.</span><span class="n">adapter</span><span class="p">.</span><span class="n">itemCount</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="custom-getter-안티패턴-2">custom getter 안티패턴 #2</h4>
+
+<p>계산량이 많습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">total</span><span class="p">:</span> <span class="n">Int</span>
+<span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">countView</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+
+<span class="k">fun</span> <span class="n">countView</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">View</span><span class="p">):</span> <span class="n">Int</span> <span class="p">=</span> <span class="k">if</span><span class="p">(</span><span class="n">view</span> <span class="k">is</span> <span class="n">ViewGroup</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">(</span><span class="m">0</span> <span class="n">until</span> <span class="n">view</span><span class="p">.</span><span class="n">childCount</span><span class="p">).</span><span class="n">map</span> <span class="p">{</span>
+    <span class="n">countView</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">getChildAt</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+  <span class="p">}.</span><span class="n">sum</span><span class="p">()</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="m">1</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>호출 측면에서 일반 변수처럼 보입니다.</p>
+
+<p>따라서 상태가 변화하거나 계산량이 많은것으로 예상할 수 없어서 버그와 성능 저하를 일으킬 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">itemCount</span> <span class="p">&gt;</span> <span class="m">20</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ↑ 위에 처럼 순진하게 접근할 수 도 있음</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="해결방법-1">해결방법</h4>
+
+<p>부작용이 없고 계산 과정이 간단할 경우 → custom getter</p>
+
+<p>부작용이 있거나 계산량이 많을 경우 →  함수</p>
+
+<p>위의 분류대로 구현하면 함수 이름보다 명확하게 호출 측이 부작용의 유무와 계산량을 예상할 수 있습니다.</p>
+
+<hr />
+
+<h3 id="custom-setter">custom setter</h3>
+
+<p>Kotlin에서 일반 var를 커스텀화 할 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">text</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="s">""</span>
+<span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">field</span> <span class="p">=</span> <span class="n">value</span>
+  <span class="n">notifyDataSetChanged</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="custom-setter를-사용하는-곳">custom setter를 사용하는 곳</h4>
+
+<ul>
+  <li>값을 설정하는 김에 갱신 처리 등을 실시</li>
+  <li>변수의 위임</li>
+</ul>
+
+<hr />
+
+<h4 id="변수의-위임">변수의 위임</h4>
+
+<p>멤버 변수에 위임을 간단하게 사용할 수 있습니다.</p>
+
+<p>(이 경우에 backing field가 생성되지 않습니다.)</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">owner</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+
+<span class="kd">var</span> <span class="py">ownerName</span><span class="p">:</span> <span class="n">String</span>
+<span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">owner</span><span class="p">.</span><span class="n">name</span>
+<span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">owner</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">value</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>※ backing field : Java로 변화 했을 경우 생성되는 일반적인 field 입니다.</p>
+
+<p>다소 중복이 있을 수 있지만 다음과 같이 쓸 수 있습니다.</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">private</span> <span class="kd">val</span> <span class="py">owner</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+
+<span class="kd">var</span> <span class="py">ownerName</span><span class="p">:</span> <span class="n">String</span> <span class="k">by</span> <span class="kd">object</span> <span class="err">: </span><span class="nc">ReadWriteProperty</span><span class="p">&lt;</span><span class="n">Any</span><span class="p">,</span> <span class="n">String</span><span class="p">&gt;</span> <span class="p">{</span>
+  <span class="k">override</span> <span class="k">fun</span> <span class="n">getValue</span><span class="p">(</span><span class="n">thisRef</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">property</span><span class="p">:</span> <span class="n">KProperty</span><span class="p">&lt;*&gt;):</span> <span class="n">String</span> <span class="p">=</span> <span class="n">owner</span><span class="p">.</span><span class="n">name</span>
+  <span class="k">override</span> <span class="k">fun</span> <span class="n">setValue</span><span class="p">(</span><span class="n">thisRef</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">property</span><span class="p">:</span> <span class="n">KProperty</span><span class="p">&lt;*&gt;,</span> <span class="n">value</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">owner</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">value</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h4 id="변수의-위임-안티패턴">변수의 위임 안티패턴</h4>
+
+<p>예: 값이 업데이트 되면 XXX를 업데이트 하고 YYY에 통지하고 ZZZ 값도 업데이트 해야하는 경우</p>
+
+<div class="language-kotlin highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="py">person</span><span class="p">:</span> <span class="n">Person</span> <span class="p">=</span> <span class="n">Person</span><span class="p">()</span>
+<span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">field</span> <span class="p">=</span> <span class="n">value</span>
+    <span class="n">updateXXX</span><span class="p">()</span>
+    <span class="n">notifyYYY</span><span class="p">()</span>
+    <span class="n">ZZZ</span> <span class="p">=</span> <span class="n">value</span><span class="p">.</span><span class="n">name</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>값만 바꿀 수 없습니다 (심지어 클래스 안에서도)</p>
+
+<p>반영과 계산을 나중에 한꺼번에 하는것은 불가능합니다.</p>
+
+<p>값을 대입했을 뿐이라고 생각하면 예외의 상황이 발생합니다.</p>
+
+<hr />
+
+<h4 id="해결-방법-4">해결 방법</h4>
+
+<p>당연하지만 var의 책임은 값의 유지에 두어야 합니다.</p>
+
+<p>var는 일반적으로 private으로 가지고 있어야합니다.</p>
+
+<p>갱신용 함수로 공개하는 편이 var로 표현하는 것 보다 혼란이 적습니다.</p>
+
+<blockquote>
+  <p>[출처] : https://www.slideshare.net/RecruitLifestyle/kotlin-87339759</p>
+</blockquote>
+
+</section>
+   
+   <!-- Tag list -->
+  
+  
+
+
+    <footer>
+        <div class="tag-list">
+        
+          <div class="meta">Tags</div>
+        
+            
+        
+          <a class="button" href="/tags#Android">
+            <p><i class="fa fa-tag fa-fw"></i> Android</p>
+          </a>
+        
+          <a class="button" href="/tags#Kotlin">
+            <p><i class="fa fa-tag fa-fw"></i> Kotlin</p>
+          </a>
+        
+        </div>
+    </footer>
+  
+
+    
+</article>
+
+<!-- Disqus -->
+
+<div class="comments">
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'dhha22';
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view comments.</noscript>
+
+</div>
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/android/2018/03/05/Kotlin-%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%90%E1%85%B5%E1%84%91%E1%85%A2%E1%84%90%E1%85%A5%E1%86%AB-1.html">
+        Kotlin 안티패턴#1
+      </a>
+  </div>
+  
+  
+</div>
+
+    </div>
+    
+<footer class="site-footer">
+    <p class="text">Copyright ©dhha22. All rights reserved</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+
+
+<li>
+	<a href="mailto:dhha77@gmail.com" title="Email">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/dhha22" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+
+  </body>
+</html>
