@@ -29,7 +29,7 @@ tags: [Android, Kotlin]
 - custom getter
 - custom setter
 
-[*Kotlin 안티패턴 #1 바로가기](https://dhha22.github.io/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html )
+[*Kotlin 안티패턴 #1 바로가기](https://dhha22.github.io/android/2018/03/05/kotlin-anti-pattern-1.html )
 
 ------
 
@@ -668,6 +668,8 @@ set(value) {
 var는 일반적으로 private으로 가지고 있어야합니다.
 
 갱신용 함수로 공개하는 편이 var로 표현하는 것 보다 혼란이 적습니다.
+
+
 
 > [출처] : https://www.slideshare.net/RecruitLifestyle/kotlin-87339759
 

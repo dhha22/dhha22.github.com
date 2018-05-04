@@ -5,12 +5,12 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>안드로이드 기술 블로그 입니다.</description>
-    <pubDate>Fri, 04 May 2018 12:29:56 +0900</pubDate>
+    <pubDate>Fri, 04 May 2018 14:04:57 +0900</pubDate>
     
       <item>
         <title>Kotlin 안티패턴#2</title>
-        <link>/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html</link>
-        <guid isPermaLink="true">/android/2018/05/04/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-2.html</guid>
+        <link>/android/2018/05/04/kotlin-anti-pattern-2.html</link>
+        <guid isPermaLink="true">/android/2018/05/04/kotlin-anti-pattern-2.html</guid>
         <description>&lt;h2 id=&quot;kotlin-안티-패턴-2&quot;&gt;Kotlin 안티 패턴 #2&lt;/h2&gt;
 
 &lt;blockquote&gt;
@@ -34,7 +34,7 @@
   &lt;li&gt;custom setter&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://dhha22.github.io/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html &quot;&gt;*Kotlin 안티패턴 #1 바로가기&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://dhha22.github.io/android/2018/03/05/kotlin-anti-pattern-1.html &quot;&gt;*Kotlin 안티패턴 #1 바로가기&lt;/a&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -632,8 +632,8 @@
     
       <item>
         <title>Kotlin 안티패턴#1</title>
-        <link>/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html</link>
-        <guid isPermaLink="true">/android/2018/03/05/Kotlin-%EC%95%88%ED%8B%B0%ED%8C%A8%ED%84%B4-1.html</guid>
+        <link>/android/2018/03/05/kotlin-aniti-pattern-1.html</link>
+        <guid isPermaLink="true">/android/2018/03/05/kotlin-aniti-pattern-1.html</guid>
         <description>&lt;h2 id=&quot;kotlin-안티-패턴-1&quot;&gt;Kotlin 안티 패턴 #1&lt;/h2&gt;
 
 &lt;blockquote&gt;
@@ -967,8 +967,8 @@
     
       <item>
         <title>RxJava를 잘 다룰수 있는 5가지 Tip</title>
-        <link>/android/2018/02/22/RxJava%EB%A5%BC-%EC%9E%98-%EB%8B%A4%EB%A3%B0%EC%88%98-%EC%9E%88%EB%8A%94-5%EA%B0%80%EC%A7%80-Tip.html</link>
-        <guid isPermaLink="true">/android/2018/02/22/RxJava%EB%A5%BC-%EC%9E%98-%EB%8B%A4%EB%A3%B0%EC%88%98-%EC%9E%88%EB%8A%94-5%EA%B0%80%EC%A7%80-Tip.html</guid>
+        <link>/android/2018/02/22/5things-about-rxjava.html</link>
+        <guid isPermaLink="true">/android/2018/02/22/5things-about-rxjava.html</guid>
         <description>&lt;h2 id=&quot;rxjava를-잘-다룰수-있는-5가지-tip&quot;&gt;RxJava를 잘 다룰수 있는 5가지 Tip&lt;/h2&gt;
 
 &lt;p&gt;RxJava를 처음 사용하거나 알고 있어도 항상 배워야 할 새로운 것이 있습니다.
@@ -1269,8 +1269,8 @@ observeOn의 내부 16 element 크기의 buffer가 overflow가 발생했을 경�
     
       <item>
         <title>MVVM 패턴</title>
-        <link>/android/2018/02/07/Model-View-ViewModel.html</link>
-        <guid isPermaLink="true">/android/2018/02/07/Model-View-ViewModel.html</guid>
+        <link>/android/2018/02/07/model-view-viewmodel.html</link>
+        <guid isPermaLink="true">/android/2018/02/07/model-view-viewmodel.html</guid>
         <description>&lt;h2 id=&quot;model---view---viewmodel&quot;&gt;Model - View - ViewModel&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;MVVM&lt;/strong&gt;(Model-View-ViewModel)은 Microsoft의 Ken Cooper와 Ted Peters가 개발한 아키텍처입니다.
