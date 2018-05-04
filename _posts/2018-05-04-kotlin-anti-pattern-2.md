@@ -29,9 +29,11 @@ tags: [Android, Kotlin]
 - custom getter
 - custom setter
 
-[*Kotlin 안티패턴 #1 바로가기](https://dhha22.github.io/android/2018/03/05/kotlin-aniti-pattern-1.html )
+> [Kotlin 안티패턴 #1] : https://dhha22.github.io/android/2018/03/05/kotlin-aniti-pattern-1.html
 
 ------
+
+
 
 ### Data Class
 
