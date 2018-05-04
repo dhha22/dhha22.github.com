@@ -5,7 +5,7 @@
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://localhost:4000/</link>
     <description>안드로이드 기술 블로그 입니다.</description>
-    <pubDate>Mon, 05 Mar 2018 17:16:51 +0900</pubDate>
+    <pubDate>Thu, 03 May 2018 17:55:57 +0900</pubDate>
     
       <item>
         <title>Kotlin 안티패턴#1</title>
@@ -23,7 +23,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;lateInit 과 null 초기화&lt;/p&gt;
+    &lt;p&gt;lateinit 과 null 초기화&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Scope 함수&lt;/p&gt;
@@ -37,7 +37,7 @@
 
 &lt;h3 id=&quot;lateinit-과-null-초기화&quot;&gt;lateinit 과 null 초기화&lt;/h3&gt;
 
-&lt;h4 id=&quot;lateinit에-대해&quot;&gt;lateinit에 대해&lt;/h4&gt;
+&lt;h4 id=&quot;lateinit에-대해서&quot;&gt;lateinit에 대해서&lt;/h4&gt;
 
 &lt;p&gt;Java에서는 초기값을 설정하지 않고 변수 선언을 했을 경우 &lt;strong&gt;null&lt;/strong&gt; 이 들어갑니다.&lt;/p&gt;
 
