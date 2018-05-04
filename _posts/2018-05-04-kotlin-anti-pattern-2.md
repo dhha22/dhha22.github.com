@@ -518,13 +518,13 @@ val isAdmin get() = userId == ADMIN_ID
 
 #### custom getter 안티패턴 #1
 
-값을 가져오는 도중 부작용이 발생합니다.
+값을 가져오는 도중 사이드 이펙트가 발생합니다.
 
 ```kotlin
 private val itemCount: Int
 get() {
   if(recyclerView.adapter == null) {
-    initXXX()	// 부작용
+    initXXX()	// 사이드 이펙트트트트
   }
   return recyclerView.adapter.itemCount
 }
@@ -567,9 +567,9 @@ if (this.itemCount > 20) {
 
 #### 해결방법
 
-부작용이 없고 계산 과정이 간단할 경우 → custom getter
+사이드 이펙트가 없고 계산 과정이 간단할 경우 → custom getter
 
-부작용이 있거나 계산량이 많을 경우 →  함수
+사이드 이펙트가 있거나 계산량이 많을 경우 →  함수
 
 위의 분류대로 구현하면 함수 이름보다 명확하게 호출 측이 부작용의 유무와 계산량을 예상할 수 있습니다.
 
