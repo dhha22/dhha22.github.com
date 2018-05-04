@@ -524,7 +524,7 @@ val isAdmin get() = userId == ADMIN_ID
 private val itemCount: Int
 get() {
   if(recyclerView.adapter == null) {
-    initXXX()	// 사이드 이펙트트트트
+    initXXX()	// 사이드 이펙트
   }
   return recyclerView.adapter.itemCount
 }
@@ -571,7 +571,7 @@ if (this.itemCount > 20) {
 
 사이드 이펙트가 있거나 계산량이 많을 경우 →  함수
 
-위의 분류대로 구현하면 함수 이름보다 명확하게 호출 측이 부작용의 유무와 계산량을 예상할 수 있습니다.
+위의 분류대로 구현하면 함수 이름보다 명확하게 호출 측이 사이드 이펙트의 유무와 계산량을 예상할 수 있습니다.
 
 ------
 
