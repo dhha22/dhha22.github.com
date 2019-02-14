@@ -3,7 +3,7 @@ layout: post
 title: Kotlin 안티패턴#2
 date: 2018-05-04
 comments: true 
-thumbnail: "assets/img/thumbnails/kotlin.png"
+thumbnail: "assets/img/thumbnails/2018_droid_kaigi_1.png"
 categories: Android
 tags: [Android, Kotlin]
 ---
