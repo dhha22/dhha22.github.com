@@ -116,13 +116,13 @@ Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Present
 
 ---
 
-#### View(Activity) 안티패턴 
+### View(Activity) 안티패턴 
 
 ![image_2.7](/assets/img/2018_droid_kaigi/image_2.7.png)
 
 ---
 
-#### Presenter 안티패턴
+### Presenter 안티패턴
 
 ![image_2.8](/assets/img/2018_droid_kaigi/image_2.8.png)
 
