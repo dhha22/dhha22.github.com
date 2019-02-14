@@ -197,7 +197,7 @@ with를 제외하면 대략적 다음과 같이 분류 할 수 있습니다.
 
 
 
-![scope_method_1](/assets/img/kotlin/scope_method_1.png)
+![image_1.1](/assets/img/2018_droid_kaigi/image_1.1.png)
 
 ------
 
