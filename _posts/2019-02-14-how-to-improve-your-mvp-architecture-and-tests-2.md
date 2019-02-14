@@ -3,7 +3,7 @@ layout: post
 title: How to improve your MVP architectrue and tests#1
 date: 2019-02-14
 comments: true 
-thumbnail: "assets/img/thumbnails/kotlin.png"
+thumbnail: "assets/img/thumbnails/2018_droid_kaigi_2.png"
 categories: Android
 tags: [Android, MVP, Architecture]
 ---
@@ -27,7 +27,7 @@ tags: [Android, MVP, Architecture]
 
 [^paymo]: 스마트 폰에서 더치페이 정산이 가능한 결제 앱
 
-![image_2.1](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.1.png)
+![image_2.1](/assets/img/2018_droid_kaigi/image_2.1.png)
 
 ------
 
@@ -42,13 +42,13 @@ tags: [Android, MVP, Architecture]
 
 ### MVP의 개요
 
-![image_2.2](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.2.png)
+![image_2.2](/assets/img/2018_droid_kaigi/image_2.2.png)
 
 ------
 
 ### Clean Architecture
 
-![image_2.3](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.3.png)
+![image_2.3](/assets/img/2018_droid_kaigi/image_2.3.png)
 
 ------
 
@@ -89,7 +89,7 @@ tags: [Android, MVP, Architecture]
 - Presenter에 직접 Android에 의존한 View 조작이나 데이터 접근 처리가 있으면 테스트를 하는게 어려워 집니다.
 - 우선 **View를 추상화** 하고 **강제로 책임을 분리**하면 됩니다.
 
-![image_2.4](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.4.png)
+![image_2.4](/assets/img/2018_droid_kaigi/image_2.4.png)
 
 
 
@@ -97,7 +97,7 @@ Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Present
 
 
 
-![image_2.5](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.5.png)
+![image_2.5](/assets/img/2018_droid_kaigi/image_2.5.png)
 
 
 
@@ -112,19 +112,19 @@ Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Present
 - 싱글 페이지의 간단한 앱
 - 쉽게 설명하기 위해 Dagger등은 미사용
 
-![image_2.6](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.6.png)
+![image_2.6](/assets/img/2018_droid_kaigi/image_2.6.png)
 
 ---
 
 #### View(Activity) 안티패턴 
 
-![image_2.7](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.7.png)
+![image_2.7](/assets/img/2018_droid_kaigi/image_2.7.png)
 
 ---
 
 #### Presenter 안티패턴
 
-![image_2.8](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.8.png)
+![image_2.8](/assets/img/2018_droid_kaigi/image_2.8.png)
 
 
 
@@ -132,27 +132,27 @@ Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Present
 
 ### View(Activity) 개선 후
 
-![image_2.9](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.9.png)
+![image_2.9](/assets/img/2018_droid_kaigi/image_2.9.png)
 
 
 
-![image_2.10](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.10.png)
+![image_2.10](/assets/img/2018_droid_kaigi/image_2.10.png)
 
-![image_2.11](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.11.png)
+![image_2.11](/assets/img/2018_droid_kaigi/image_2.11.png)
 
 ---
 
 ### Presenter 개선 후
 
-![image_2.12](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.12.png)
+![image_2.12](/assets/img/2018_droid_kaigi/image_2.12.png)
 
 
 
-![image_2.13](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.13.png)
+![image_2.13](/assets/img/2018_droid_kaigi/image_2.13.png)
 
 
 
-![image_2.13](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.13.png)
+![image_2.13](/assets/img/2018_droid_kaigi/image_2.13.png)
 
 ---
 
