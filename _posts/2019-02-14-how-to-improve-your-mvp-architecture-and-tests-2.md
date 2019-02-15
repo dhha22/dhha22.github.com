@@ -75,15 +75,15 @@ tags: [Android, MVP, Architecture]
 
 ------
 
-### 안티패턴의 개선방안
+### 안티패턴 개선방안 의제
 
-#### 안티패턴 개선방안 의제
-
-- View 와 Presenter를 분리
+- **View 와 Presenter를 분리**
 - Presenter에 대한 테스트 작성
-- 테스트를 리팩토링 하기
+- 테스트 코드를 리팩토링 하기
 
-#### View 와 Presenter를 분리하기
+---
+
+### View 와 Presenter를 분리하기
 
 - 책임을 결정해도 Activity와 Fragement를 직접 Presenter에서 참조되어 버리면 결국 뭐든지 생겨버립니다.
 - Presenter에 직접 Android에 의존한 View 조작이나 데이터 접근 처리가 있으면 테스트를 하는게 어려워 집니다.
