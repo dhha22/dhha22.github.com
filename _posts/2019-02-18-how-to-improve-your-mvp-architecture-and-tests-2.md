@@ -186,23 +186,19 @@ tags: [Android, MVP, Architecture]
 
 #### 테스트의 피라미드를 기억
 
+![image_3.1](/assets/img/2018_droid_kaigi/image_3.1.png)
+
 - 통합 테스트는 강력하고 편리하지만, 모델에 대한 간단한 assert 테스트 보다 쓰기 편하고 정밀도가 높음
 - 본래는 유닛 테스트의 비중이 큰것이 건전
 - Presenter 에서 모델 처리 및 테스트를 옮겨서 실행
-
-![image_3.1](/assets/img/2018_droid_kaigi/image_3.1.png)
 
 
 
 ![image_3.11](/assets/img/2018_droid_kaigi/image_3.11.png)
 
-
-
 ![image_3.12](/assets/img/2018_droid_kaigi/image_3.12.png)
 
 ![image_3.13](/assets/img/2018_droid_kaigi/image_3.13.png)
-
-
 
 ![image_3.14](/assets/img/2018_droid_kaigi/image_3.14.png)
 
