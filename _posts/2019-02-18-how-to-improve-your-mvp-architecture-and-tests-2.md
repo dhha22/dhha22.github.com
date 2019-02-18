@@ -27,7 +27,7 @@ tags: [Android, MVP, Architecture]
 
 ### MVP 안티 패턴 개선 의제 
 
-- View 와 Presenter를 분리
+- View 와 Presenter 를 분리
 - **Presenter 에 대한 테스트를 작성**
 - 테스트 코드를 리팩토링 하기
 
