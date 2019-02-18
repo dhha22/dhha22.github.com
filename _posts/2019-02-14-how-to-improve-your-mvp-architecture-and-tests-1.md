@@ -19,7 +19,7 @@ tags: [Android, MVP, Architecture]
 ### 이번 주제에서 다뤄 볼 내용
 
 - MVP 아키텍처를 적용했던 프로젝트의 안티패턴 소개
-- **안티패턴의 개선 방법**과 **Presenter**에 대한 테스트 작성 및 역할 설명
+- **안티패턴의 개선 방법**과 **Presenter** 에 대한 테스트 작성 및 역할 설명
 
 ------
 
@@ -34,9 +34,9 @@ tags: [Android, MVP, Architecture]
 ### MVP 사용하고 있습니까?
 
 - Android에서 2년 정도 전에 화제가 되었음
-- Controller 대신에 **Presenter**라고 부르는 UI 로직을 담당하는 클래스를 이용하고 있음
+- Controller 대신에 **Presenter** 라고 부르는 UI 로직을 담당하는 클래스를 이용하고 있음
 - **Activity**와 **Fragment**는 View로 취급하고 **최대한 로직을 가지지 못하게 함**
-- Presenter의 개념을 적용하고 있는 프로젝트가 상당히 많음
+- Presenter 의 개념을 적용하고 있는 프로젝트가 상당히 많음
 
 ------
 
@@ -68,32 +68,32 @@ tags: [Android, MVP, Architecture]
 → 실제로 일부 프로젝트에서 경험했던 부분
 
 1. 테스트를 작성하지 않은 경우
-2. Presenter가 Activity와 Fragment를 직접 접근하여 조작하고 있는 경우
-3. View에 로직이 있고 Presenter에서 UI를 직접 조작하고 있거나 일관성이 없는 경우
+2. Presenter 가 Activity 와 Fragment 를 직접 접근하여 조작하고 있는 경우
+3. View 에 로직이 있고 Presenter 에서 UI를 직접 조작하고 있거나 일관성이 없는 경우
 
-이러한 안티패턴이 발생한 이유: **View 와 Presenter의 책임 분류가 되어 있지 않기 때문**
+이러한 안티패턴이 발생한 이유: **View 와 Presenter 의 책임 분류가 되어 있지 않기 때문**
 
 ------
 
 ### 안티패턴 개선방안 의제
 
-- **View 와 Presenter를 분리**
-- Presenter에 대한 테스트 작성
+- **View 와 Presenter 를 분리**
+- Presenter 에 대한 테스트 작성
 - 테스트 코드를 리팩토링 하기
 
 ---
 
-### View 와 Presenter를 분리하기
+### View 와 Presenter 를 분리하기
 
-- 책임을 결정해도 Activity와 Fragement를 직접 Presenter에서 참조되어 버리면 결국 뭐든지 생겨버립니다.
-- Presenter에 직접 Android에 의존한 View 조작이나 데이터 접근 처리가 있으면 테스트를 하는게 어려워 집니다.
-- 우선 **View를 추상화** 하고 **강제로 책임을 분리**하면 됩니다.
+- 책임을 결정해도 Activity와 Fragement 를 직접 Presenter에서 참조되어 버리면 결국 뭐든지 생겨버립니다.
+- Presenter 에 직접 Android 에 의존한 View 조작이나 데이터 접근 처리가 있으면 테스트를 하는게 어려워 집니다.
+- 우선 **View 를 추상화** 하고 **강제로 책임을 분리**하면 됩니다.
 
 ![image_2.4](/assets/img/2018_droid_kaigi/image_2.4.png)
 
 
 
-Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Presenter에서 분리**하여 Presenter를 순수하게 유지합니다.
+Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Presenter 에서 분리**하여 Presenter를 순수하게 유지합니다.
 
 
 
@@ -101,7 +101,7 @@ Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Present
 
 
 
-테스트 할 때 분리된 부분을 Mock 화 하기 때문에 Presenter에서 테스트를 진행하기 쉬워집니다.
+테스트 할 때 분리된 부분을 Mock 화 하기 때문에 Presenter 에서 테스트를 진행하기 쉬워집니다.
 
 ------
 
@@ -158,8 +158,8 @@ Android에 의존한 **프로세싱 및 데이터 접근 프로세싱을 Present
 
 ### 요약
 
-- View를 추상화하여 Presenter는 미리 인터페이스에 정의 된 메서드를 통해서만 View를 접근 할 수 있는 강제력이 일어남
-- View는 이벤트 통지 및 그리기만 하고 표출판정 등의 논리는 Presenter 측에서 실행
+- View 를 추상화하여 Presenter 는 미리 인터페이스에 정의 된 메서드를 통해서만 View 를 접근 할 수 있는 강제력이 일어남
+- View 는 이벤트 통지 및 그리기만 하고 표출판정 등의 논리는 Presenter 측에서 실행
 
 
 
