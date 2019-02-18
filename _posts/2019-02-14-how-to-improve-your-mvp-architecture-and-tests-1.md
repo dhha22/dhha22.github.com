@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to improve your MVP architectrue and tests#1
+title: How to improve your MVP architectrue and tests #1
 date: 2019-02-14
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_2.png"
@@ -10,7 +10,7 @@ tags: [Android, MVP, Architecture]
 
 
 
-## How to improve your MVP architectrue and tests
+## How to improve your MVP architectrue and tests #1
 
 > 해당 글은 Droid kaigi 2018에서 발표했던 How to improve your MVP architectrue and tests 를 번역한 글입니다.
 
