@@ -102,10 +102,6 @@ tags: [Android, MVP, Architecture]
 
 ![image_3.4](/assets/img/2018_droid_kaigi/image_3.4.png)
 
-- 입력 된 문자열이 비어있으면 오류가 나타나서 처리가 완료되었는지 확인
-- 입력 된 문자열이 비어있으면 오류가 표시되지 않는것을 확인
-- 입력 된 문자열을 사용하여 데이터 검색이 이뤄지는것을 확인
-
 ![image_3.5](/assets/img/2018_droid_kaigi/image_3.5.png)
 
 ---
