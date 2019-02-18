@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to improve your MVP architectrue and tests #2
+title: How to improve your MVP architectrue and tests#2
 date: 2019-02-18
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_2.png"
@@ -35,7 +35,7 @@ tags: [Android, MVP, Architecture]
 
 ### 테스트의 분류
 
-![image_3.1](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.1.png)
+![image_3.1](/assets/img/2018_droid_kaigi/image_3.1.png)
 
 
 
@@ -69,7 +69,7 @@ tags: [Android, MVP, Architecture]
 
 ### 복습
 
-![image_2.4](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.4.png)
+![image_2.4](/assets/img/2018_droid_kaigi/image_2.4.png)
 
 
 
@@ -77,7 +77,7 @@ tags: [Android, MVP, Architecture]
 
 
 
-![image_2.5](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_2.5.png)
+![image_2.5](/assets/img/2018_droid_kaigi/image_2.5.png)
 
 
 
@@ -85,7 +85,7 @@ tags: [Android, MVP, Architecture]
 
 
 
-![image_3.2](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.2.png)
+![image_3.2](/assets/img/2018_droid_kaigi/image_3.2.png)
 
 ----
 
@@ -94,19 +94,19 @@ tags: [Android, MVP, Architecture]
 - Java의 주요 모의 라이브러리
 - 클래스나 인터페이스의 모의 인스턴스를 생성할시, 메서드에 임의의 반환값을 지정하거나 메서드가 호출된 횟수를 확인할 수 있음
 
-![image_3.3](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.3.png)
+![image_3.3](/assets/img/2018_droid_kaigi/image_3.3.png)
 
 ---
 
 ### 샘플코드
 
-![image_3.4](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.4.png)
+![image_3.4](/assets/img/2018_droid_kaigi/image_3.4.png)
 
 - 입력 된 문자열이 비어있으면 오류가 나타나서 처리가 완료되었는지 확인
 - 입력 된 문자열이 비어있으면 오류가 표시되지 않는것을 확인
 - 입력 된 문자열을 사용하여 데이터 검색이 이뤄지는것을 확인
 
-![image_3.5](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.5.png)
+![image_3.5](/assets/img/2018_droid_kaigi/image_3.5.png)
 
 ---
 
@@ -144,7 +144,7 @@ tags: [Android, MVP, Architecture]
 
 ### 테스트 코드를 다시 보면
 
-![image_3.6](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.6.png)
+![image_3.6](/assets/img/2018_droid_kaigi/image_3.6.png)
 
 ---
 
@@ -162,17 +162,17 @@ tags: [Android, MVP, Architecture]
 
 
 
-![image_3.7](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.7.png)
+![image_3.7](/assets/img/2018_droid_kaigi/image_3.7.png)
 
-![image_3.8](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.8.png)
-
-
-
-![image_3.9](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.9.png)
+![image_3.8](/assets/img/2018_droid_kaigi/image_3.8.png)
 
 
 
-![image_3.10](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.10.png)
+![image_3.9](/assets/img/2018_droid_kaigi/image_3.9.png)
+
+
+
+![image_3.10](/assets/img/2018_droid_kaigi/image_3.10.png)
 
 
 
@@ -194,21 +194,21 @@ tags: [Android, MVP, Architecture]
 - 본래는 유닛 테스트의 비중이 큰것이 건전
 - Presenter 에서 모델 처리 및 테스트를 옮겨서 실행
 
-![image_3.1](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.1.png)
+![image_3.1](/assets/img/2018_droid_kaigi/image_3.1.png)
 
 
 
-![image_3.11](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.11.png)
+![image_3.11](/assets/img/2018_droid_kaigi/image_3.11.png)
 
 
 
-![image_3.12](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.12.png)
+![image_3.12](/assets/img/2018_droid_kaigi/image_3.12.png)
 
-![image_3.13](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.13.png)
+![image_3.13](/assets/img/2018_droid_kaigi/image_3.13.png)
 
 
 
-![image_3.14](/Users/david/Desktop/dhha22.github.com/assets/img/2018_droid_kaigi/image_3.14.png)
+![image_3.14](/assets/img/2018_droid_kaigi/image_3.14.png)
 
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to improve your MVP architectrue and tests #1
+title: How to improve your MVP architectrue and tests#1
 date: 2019-02-14
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_2.png"
