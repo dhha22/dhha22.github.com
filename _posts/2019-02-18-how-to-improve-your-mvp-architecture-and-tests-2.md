@@ -21,7 +21,7 @@ tags: [Android, MVP, Architecture]
 - MVP 아키텍처를 적용했던 프로젝트의 안티패턴 소개
 - 안티패턴의 개선 방법과 **Presenter**에 대한 테스트 작성 및 역할 설명
 
-> [How to improve your MVP architectrue and tests #1] : https://dhha22.github.io/android/2018/03/05/kotlin-aniti-pattern-1.html
+> [How to improve your MVP architectrue and tests #1] : https://dhha22.github.io/android/2019/02/14/how-to-improve-your-mvp-architecture-and-tests-1.html
 
 ---
 
