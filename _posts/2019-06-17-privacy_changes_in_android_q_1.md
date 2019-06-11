@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Privacy Changes in Android Q #1
+title: Privacy Changes in Android Q#1
 date: 2019-06-17
 comments: true 
 thumbnail: "assets/img/thumbnails/io_2019_android.jpeg"
@@ -166,11 +166,11 @@ Android Q에서는 백그라운드에서 액티비티 실행이 제한됩니다.
 
 백그라운드 상태일때 액티비티를 실행시킬수 있는 몇가지 사항이 있습니다.
 
-- 시스템에서 PendingIntent을 통하여 실행시키는 경우
-- 시스템 브로드 캐스트를 받아서 실행시키는 경우 (ACTION_NEW_OUTGOING_CALL, SECRET_CODE_ACTION 등)
-- 사용자로부터 SYSTEM_ALERT_WINDOW 권한을 받아서 실행시키는 경우
+- 시스템에서 **PendingIntent **을 통하여 실행시키는 경우
+- 시스템 브로드 캐스트를 받아서 실행시키는 경우 (**ACTION_NEW_OUTGOING_CALL**, **SECRET_CODE_ACTION** 등)
+- 사용자로부터 **SYSTEM_ALERT_WINDOW** 권한을 받아서 실행시키는 경우
 
-특별한 상황이 아닌 이상은 PendingIntent을 통하여 액티비티를 실행시키는것을 권장합니다.
+특별한 상황이 아닌 이상은 **PendingIntent** 을 통하여 액티비티를 실행시키는것을 권장합니다.
 
 
 
@@ -212,7 +212,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 
 
-소스코드를 보면 **setFullScreenIntent** 메서드를 사용한것을 확인할 수 있는데요. 파라미터로 PendingIntent가 들어가는것을 확인할 수 있습니다. setFullScreenIntent에 대하여 좀 더 자세히 알아보도록 하겠습니다.
+소스코드를 보면 **setFullScreenIntent** 메서드를 사용한것을 확인할 수 있는데요. 파라미터로 **PendingIntent** 가 들어가는것을 확인할 수 있습니다. setFullScreenIntent에 대하여 좀 더 자세히 알아보도록 하겠습니다.
 
 
 
@@ -222,7 +222,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 
 
-setFullScreenIntent를 사용하면 Heads-up notification이 나타나고 자동으로 사라지지 않습니다.
+**setFullScreenIntent **를 사용하면 **Heads-up notification **이 나타나고 자동으로 사라지지 않습니다.
 
 만약 NotificagionChannel의 중요도를 설정하지 않으면 Heads-up notification은 나타나지 않습니다.
 
@@ -256,11 +256,11 @@ PendingIntent에 대하여 좀 더 자세히 살펴보도록 하겠습니다.
 
 
 
-백그라운드에서 push message가 왔을 경우 notification을 띄우는데 notification manager가 시스템 서비스에서 관리합니다. 
+백그라운드에서 push message가 왔을 경우 notification을 띄우는데 **notification manager **가 시스템 서비스에서 관리합니다. 
 
 notification에서 앱에 있는 액티비티를 실행 시키려면 intent을 통하여 실행시켜야 하지만 앱과 전혀 다른 프로세스이므로 실행시킬수 있는 권한이 없습니다.
 
-이때 PendingIntent를 이용하면 intent를 wrapping하고 notification manager에게 액티비티를 실행시키는 권한을 전달할 수 있습니다.
+이때 **PendingIntent** 를 이용하면 intent를 wrapping하고 **notification manager** 에게 액티비티를 실행시키는 권한을 전달할 수 있습니다.
 
 
 
@@ -268,7 +268,7 @@ notification에서 앱에 있는 액티비티를 실행 시키려면 intent을 �
 
 ![image_1.22](/assets/img/2019_google_io/image_1.22.jpeg)
 
-그러면 RemoteViews에서 버튼들의 클릭액션은 어떻게 구현해야할까요?
+그러면 RemoteViews 에서 버튼들의 클릭액션은 어떻게 구현해야할까요?
 
 
 
@@ -278,7 +278,7 @@ notification에서 앱에 있는 액티비티를 실행 시키려면 intent을 �
 
 
 
-RemoteViews는 다른 프로세스에서 동작하고 View를 상속받은 실제 View가 아닙니다. 
+RemoteViews 는 다른 프로세스에서 동작하고 View를 상속받은 실제 View가 아닙니다. 
 
 이렇기 때문에 몇가지 제약사항이 있습니다. 사용할 수 있는 View가 제한되어있기 때문에 커스텀 뷰를 이용할 수 없습니다.
 
@@ -292,7 +292,7 @@ RemoteViews는 다른 프로세스에서 동작하고 View를 상속받은 실�
 
 버튼의 클릭을 구현할 때는 **setOnClickListener** 방식이 아닌 **setOnClickPendingIntent**를 이용하여 구현해야 합니다.
 
-해당 메서드의 파라미터는 버튼의 id 값과 PendingIntent가 있습니다.
+해당 메서드의 파라미터는 버튼의 id 값과 **PendingIntent** 가 있습니다.
 
 버튼 클릭 로직을 쉽게 관리하기 위하여 바로 액티비티를 실행시키지 않고 브로드캐스트를 이용하였습니다.
 
@@ -306,7 +306,7 @@ RemoteViews는 다른 프로세스에서 동작하고 View를 상속받은 실�
 
 브로드캐스트 리시버 부분을 보면 버튼을 클릭했을 경우 notification이 사라져야 하기 때문에 notification manager의 cancel을 호출하였습니다.
 
-버튼을 클릭했을 경우 intent 정보에 Boolean 값을 추가하였는데요. 수락버튼을 눌렀을 경우 acceptCall 값이 true이기 때문에 라이브 상담 액티비티를 PendingIntent를 이용하여 실행시켰습니다.
+버튼을 클릭했을 경우 intent 정보에 Boolean 값을 추가하였는데요. 수락버튼을 눌렀을 경우 acceptCall 값이 true이기 때문에 라이브 상담 액티비티를 **PendingIntent** 를 이용하여 실행시켰습니다.
 
 
 
