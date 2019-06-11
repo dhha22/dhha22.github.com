@@ -202,7 +202,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 
 
-다음과 같이 Notification을 이용하여 **full-screen intent**를 이용하면 사용자에게 액티비티를 실행시킬수 있는 권한을 줄 수 있습니다.
+다음과 같이 Notification을 이용하여 **full-screen intent** 를 이용하면 사용자에게 액티비티를 실행시킬수 있는 권한을 줄 수 있습니다.
 
 
 
@@ -222,7 +222,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 
 
-**setFullScreenIntent **를 사용하면 **Heads-up notification **이 나타나고 자동으로 사라지지 않습니다.
+**setFullScreenIntent** 를 사용하면 **Heads-up notification** 이 나타나고 자동으로 사라지지 않습니다.
 
 만약 NotificagionChannel의 중요도를 설정하지 않으면 Heads-up notification은 나타나지 않습니다.
 
@@ -234,7 +234,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 
 
-여기서 중요한 부분은 NotificaionChannel에서 중요도를 설정할때 **IMPORTANCE_HIGH**로 설정하지 않았을 경우에도 Heads-up notification이 나타나지 않습니다.
+여기서 중요한 부분은 NotificaionChannel에서 중요도를 설정할때 **IMPORTANCE_HIGH** 로 설정하지 않았을 경우에도 Heads-up notification이 나타나지 않습니다.
 
 
 
@@ -256,7 +256,7 @@ PendingIntent에 대하여 좀 더 자세히 살펴보도록 하겠습니다.
 
 
 
-백그라운드에서 push message가 왔을 경우 notification을 띄우는데 **notification manager **가 시스템 서비스에서 관리합니다. 
+백그라운드에서 push message가 왔을 경우 notification을 띄우는데 **notification manager** 가 시스템 서비스에서 관리합니다. 
 
 notification에서 앱에 있는 액티비티를 실행 시키려면 intent을 통하여 실행시켜야 하지만 앱과 전혀 다른 프로세스이므로 실행시킬수 있는 권한이 없습니다.
 
@@ -290,7 +290,7 @@ RemoteViews 는 다른 프로세스에서 동작하고 View를 상속받은 실�
 
 
 
-버튼의 클릭을 구현할 때는 **setOnClickListener** 방식이 아닌 **setOnClickPendingIntent**를 이용하여 구현해야 합니다.
+버튼의 클릭을 구현할 때는 **setOnClickListener** 방식이 아닌 **setOnClickPendingIntent** 를 이용하여 구현해야 합니다.
 
 해당 메서드의 파라미터는 버튼의 id 값과 **PendingIntent** 가 있습니다.
 
