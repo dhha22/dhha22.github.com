@@ -166,7 +166,7 @@ Android Q에서는 백그라운드에서 액티비티 실행이 제한됩니다.
 
 백그라운드 상태일때 액티비티를 실행시킬수 있는 몇가지 사항이 있습니다.
 
-- 시스템에서 **PendingIntent**을 통하여 실행시키는 경우
+- 시스템에서 **PendingIntent** 을 통하여 실행시키는 경우
 - 시스템 브로드 캐스트를 받아서 실행시키는 경우 (**ACTION_NEW_OUTGOING_CALL**, **SECRET_CODE_ACTION** 등)
 - 사용자로부터 **SYSTEM_ALERT_WINDOW** 권한을 받아서 실행시키는 경우
 
