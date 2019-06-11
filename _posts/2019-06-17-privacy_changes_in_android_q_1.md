@@ -22,9 +22,9 @@ tags: [Android]
 
 안드로이드에서 새로운 버전이 나올때 마다 개인정보를 보호하기 위하여 다양한 기능을 추가하고 있습니다.
 
-![Google I:O extended Android.003](/assets/img/2019_google_i:0/Google I:O extended Android.003.jpeg)
 
 
+![image_1.1](/assets/img/2019_google_io/image_1.1.jpeg)
 
 Lockdown Mode, Secure DNS 그리고 마시멜로우 부터 추가되었던 Runtime permissions 등이 있었습니다.
 
@@ -32,7 +32,7 @@ Lockdown Mode, Secure DNS 그리고 마시멜로우 부터 추가되었던 Runti
 
 ---
 
-![Google I:O extended Android.004](/assets/img/2019_google_i:0/Google I:O extended Android.004.jpeg)
+![image_1.2](/assets/img/2019_google_io/image_1.2.jpeg)
 
 
 
@@ -42,7 +42,7 @@ Android Q 에서도 개인정보를 보호하기 위하여 많은 기능이 추�
 
 ---
 
-![Google I:O extended Android.005](/assets/img/2019_google_i:0/Google I:O extended Android.005.jpeg)
+![image_1.3](/assets/img/2019_google_io/image_1.3.jpeg)
 
 
 
@@ -52,7 +52,7 @@ Android Q 에서도 개인정보를 보호하기 위하여 많은 기능이 추�
 
 ---
 
-![Google I:O extended Android.007](/assets/img/2019_google_i:0/Google I:O extended Android.007.jpeg)
+![image_1.4](/assets/img/2019_google_io/image_1.4.jpeg)
 
 
 
@@ -62,7 +62,7 @@ Android Q 에서도 개인정보를 보호하기 위하여 많은 기능이 추�
 
 ---
 
-![Google I:O extended Android.008](/assets/img/2019_google_i:0/Google I:O extended Android.008.jpeg)
+![image_1.5](/assets/img/2019_google_io/image_1.5.jpeg)
 
 
 
@@ -78,7 +78,7 @@ Android Q 에서도 개인정보를 보호하기 위하여 많은 기능이 추�
 
 ---
 
-![Google I:O extended Android.009](/assets/img/2019_google_i:0/Google I:O extended Android.009.jpeg)
+![image_1.6](/assets/img/2019_google_io/image_1.6.jpeg)
 
 
 
@@ -90,7 +90,7 @@ Android Q Beta에서 백그라운드 제한사항을 실행시키고 싶으면
 
 ---
 
-![Google I:O extended Android.010](/assets/img/2019_google_i:0/Google I:O extended Android.010.jpeg)
+![image_1.7](/assets/img/2019_google_io/image_1.7.jpeg)
 
 
 
@@ -102,7 +102,7 @@ Android Q 이전에는 사용자 상호작용 없이 백그라운드에서 액�
 
 ---
 
-![Google I:O extended Android.011](/assets/img/2019_google_i:0/Google I:O extended Android.011.jpeg)
+![image_1.8](/assets/img/2019_google_io/image_1.8.jpeg)
 
 
 
@@ -112,7 +112,7 @@ Android Q 이전에는 사용자 상호작용 없이 백그라운드에서 액�
 
 ---
 
-![Google I:O extended Android.012](/assets/img/2019_google_i:0/Google I:O extended Android.012.jpeg)
+![image_1.9](/assets/img/2019_google_io/image_1.9.jpeg)
 
 
 
@@ -122,7 +122,7 @@ Android Q 이전에는 사용자 상호작용 없이 백그라운드에서 액�
 
 ---
 
-![Google I:O extended Android.014](/assets/img/2019_google_i:0/Google I:O extended Android.014.jpeg)
+![image_1.10](/assets/img/2019_google_io/image_1.10.jpeg)
 
 
 
@@ -134,7 +134,7 @@ onMessageReceived 함수 안에서는 액티비티를 실행시키기 위하여 
 
 ---
 
-![Google I:O extended Android.015](/assets/img/2019_google_i:0/Google I:O extended Android.015.jpeg)
+![image_1.11](/assets/img/2019_google_io/image_1.11.jpeg)
 
 
 
@@ -150,7 +150,7 @@ Android Q에서는 백그라운드에서 액티비티 실행이 제한됩니다.
 
 ---
 
-![Google I:O extended Android.016](/assets/img/2019_google_i:0/Google I:O extended Android.016.jpeg)
+![image_1.12](/assets/img/2019_google_io/image_1.12.jpeg)
 
 
 
@@ -160,7 +160,7 @@ Android Q에서는 백그라운드에서 액티비티 실행이 제한됩니다.
 
 ---
 
-![Google I:O extended Android.018](/assets/img/2019_google_i:0/Google I:O extended Android.018.jpeg)
+![image_1.13](/assets/img/2019_google_io/image_1.13.jpeg)
 
 
 
@@ -176,7 +176,7 @@ Android Q에서는 백그라운드에서 액티비티 실행이 제한됩니다.
 
 ---
 
-![Google I:O extended Android.019](/assets/img/2019_google_i:0/Google I:O extended Android.019.jpeg)
+![image_1.14](/assets/img/2019_google_io/image_1.14.jpeg)
 
 
 
@@ -186,7 +186,7 @@ Android Q에서는 백그라운드에서 액티비티 실행이 제한됩니다.
 
 ---
 
-![Google I:O extended Android.021](/assets/img/2019_google_i:0/Google I:O extended Android.021.jpeg)
+![image_1.15](/assets/img/2019_google_io/image_1.15.jpeg)
 
 
 
@@ -198,9 +198,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 ---
 
-![Google I:O extended Android.023](/assets/img/2019_google_i:0/Google I:O extended Android.023.jpeg)
-
-
+![image_1.16](/assets/img/2019_google_io/image_1.16.jpeg)
 
 
 
@@ -210,7 +208,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 ---
 
-![Google I:O extended Android.027](/assets/img/2019_google_i:0/Google I:O extended Android.027.jpeg)
+![image_1.17](/assets/img/2019_google_io/image_1.17.jpeg)
 
 
 
@@ -220,7 +218,7 @@ Android Q에서 서버에서 push message를 받고 바로 액티비티를 실�
 
 ---
 
-![Google I:O extended Android.029](/assets/img/2019_google_i:0/Google I:O extended Android.029.jpeg)
+![image_1.18](/assets/img/2019_google_io/image_1.18.jpeg)
 
 
 
@@ -232,7 +230,7 @@ setFullScreenIntent를 사용하면 Heads-up notification이 나타나고 자동
 
 ---
 
-![Google I:O extended Android.031](/assets/img/2019_google_i:0/Google I:O extended Android.031.jpeg)
+![image_1.19](/assets/img/2019_google_io/image_1.19.jpeg)
 
 
 
@@ -242,7 +240,7 @@ setFullScreenIntent를 사용하면 Heads-up notification이 나타나고 자동
 
 ---
 
-![Google I:O extended Android.033](/assets/img/2019_google_i:0/Google I:O extended Android.033.jpeg)
+![image_1.20](/assets/img/2019_google_io/image_1.20.jpeg)
 
 
 
@@ -254,7 +252,7 @@ PendingIntent에 대하여 좀 더 자세히 살펴보도록 하겠습니다.
 
 ---
 
-![Google I:O extended Android.034](/assets/img/2019_google_i:0/Google I:O extended Android.034.jpeg)
+![image_1.21](/assets/img/2019_google_io/image_1.21.jpeg)
 
 
 
@@ -268,7 +266,7 @@ notification에서 앱에 있는 액티비티를 실행 시키려면 intent을 �
 
 ---
 
-![Google I:O extended Android.035](/assets/img/2019_google_i:0/Google I:O extended Android.035.jpeg)
+![image_1.22](/assets/img/2019_google_io/image_1.22.jpeg)
 
 그러면 RemoteViews에서 버튼들의 클릭액션은 어떻게 구현해야할까요?
 
@@ -276,7 +274,7 @@ notification에서 앱에 있는 액티비티를 실행 시키려면 intent을 �
 
 ---
 
-![Google I:O extended Android.036](/assets/img/2019_google_i:0/Google I:O extended Android.036.jpeg)
+![image_1.23](/assets/img/2019_google_io/image_1.23.jpeg)
 
 
 
@@ -288,7 +286,7 @@ RemoteViews는 다른 프로세스에서 동작하고 View를 상속받은 실�
 
 ---
 
-![Google I:O extended Android.039](/assets/img/2019_google_i:0/Google I:O extended Android.039.jpeg)
+![image_1.24](/assets/img/2019_google_io/image_1.24.jpeg)
 
 
 
@@ -302,7 +300,7 @@ RemoteViews는 다른 프로세스에서 동작하고 View를 상속받은 실�
 
 ---
 
-![Google I:O extended Android.042](/assets/img/2019_google_i:0/Google I:O extended Android.042.jpeg)
+![image_1.25](/assets/img/2019_google_io/image_1.25.jpeg)
 
 
 
@@ -314,7 +312,7 @@ RemoteViews는 다른 프로세스에서 동작하고 View를 상속받은 실�
 
 ---
 
-![Google I:O extended Android.043](/assets/img/2019_google_i:0/Google I:O extended Android.043.jpeg)
+![image_1.26](/assets/img/2019_google_io/image_1.26.jpeg)
 
 
 
