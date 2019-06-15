@@ -132,7 +132,7 @@ Android Q 부터 IMEI 식별자는 사용할 수 없지만 SSAID는 다바이스
 
 ---
 
-![image_2.10](/assets/img/2019_google_io/image_1.10.jpeg)
+![image_2.10](/assets/img/2019_google_io/image_2.10.jpeg)
 
 
 
@@ -141,10 +141,6 @@ Android Q 부터 IMEI 식별자는 사용할 수 없지만 SSAID는 다바이스
 MediaDrm 모듈중 하나인 **Widevine** 모듈이 있습니다. 
 
 Widevine 모듈은 Google 에서 제공하는 모듈중 하나이며 안드로이드 ExoPlayer에서 사용하는것을 확인할 수 있습니다.
-
-onMessageReceived 함수 안에서는 액티비티를 실행시키기 위하여 **FLAG_ACTIVITY_NEW_TASK** 를 사용하고 있습니다.
-
-APK 별로 ID 값이 다르고 **디바이스를 초기화 하더라도 값은 동일하게 유지** 됩니다.
 
 ---
 
