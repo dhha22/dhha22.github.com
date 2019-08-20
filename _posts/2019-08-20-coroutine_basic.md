@@ -4,7 +4,7 @@ layout: post
 title: Coroutine Basic
 date: 2019-08-20
 comments: true 
-thumbnail: "assets/img/thumbnails/coroutine_basic.jpeg"
+thumbnail: "assets/img/thumbnails/coroutine_basic.png"
 categories: Android
 tags: [Android, Coroutine, Kotlin]
 ---
