@@ -19,7 +19,7 @@ tags: [Android, Coroutine, Kotlin]
 
 그 이유는 Kotlin에서의 coroutine은 자신만의 stack이 존재하지 않으며 
 
-<!--C#, Scala, Kotlin의 coroutine은 stackless이며 Quasar, Javaflow에서의 coroutine은 stackful 입니다.-->
+(C#, Scala, Kotlin의 coroutine은 stackless이며 Quasar, Javaflow에서의 coroutine은 stackful 입니다.)
 
 native thread와 mapping 되지 않기 때문에 context switchig이 필요하지 않습니다.
 
@@ -55,7 +55,7 @@ Thread.sleep() 메서드는 blocking 메서드 이기 때문에
 
 ------
 
-이번에는 thread 대신에 GlobalScope.launch를 이용하여 실행을 시켜보도록 하겠습니다.
+이번에는 thread 대신에 **GlobalScope.launch** 를 이용하여 실행을 시켜보도록 하겠습니다.
 
 ```kotlin
 fun main() {
@@ -101,7 +101,7 @@ fun main() = runBlocking {
 }
 ```
 
-main 함수에 **runBlocking<Unit> {...}** coroutine scope를 설정하면 사용할 수 있습니다.
+main 함수에 **runBlocking {...}** coroutine scope를 설정하면 사용할 수 있습니다.
 
 coroutine은 thread 와 비슷한 동작을 하는데 왜 coroutine을 사용해야할까요?
 
