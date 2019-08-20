@@ -13,12 +13,13 @@ tags: [Android, Coroutine, Kotlin]
 
 ## Coroutine Basic
 
-##### 이번 글에서는 Coroutine의 기본적인 사용 방법과 왜 Coroutine을 써야하는지에 대하여 다뤄보도록 하겠습니다.
+> 이번 글에서는 Coroutine의 기본적인 사용 방법과 왜 Coroutine을 써야하는지에 대하여 다뤄보도록 하겠습니다.
 
 **coroutine** 이 **light-weight thread** 같다 라고 말합니다.
 
 그 이유는 Kotlin에서의 coroutine은 자신만의 stack이 존재하지 않으며 
-(C#, Scala, Kotlin의 coroutine은 stackless이며 Quasar, Javaflow에서의 coroutine은 stackful 입니다.)
+
+<!--C#, Scala, Kotlin의 coroutine은 stackless이며 Quasar, Javaflow에서의 coroutine은 stackful 입니다.-->
 
 native thread와 mapping 되지 않기 때문에 context switchig이 필요하지 않습니다.
 
@@ -106,7 +107,7 @@ coroutine은 thread 와 비슷한 동작을 하는데 왜 coroutine을 사용해
 
 ------
 
-**첫번째, thread 보다 더 좋은 performance를 나타내기 때문입니다.**
+#### 첫번째, thread 보다 더 좋은 performance를 나타내기 때문입니다.
 
 만약 10만번 반복되는 작업을 실행하고 싶으면 어떻게 해야할까요?
 
@@ -172,7 +173,7 @@ coroutine을 사용하면 많이 생성하더라도 아주 훌륭한 performance
 
 ------
 
-**두번째, 반복되는 작업을 쉽게 취소할 수 있습니다.**
+#### 두번째, 반복되는 작업을 쉽게 취소할 수 있습니다.
 
 다음과 같이 반복되는 작업을 하고 있을때 해당 작업을 취소하고 싶으면 어떻게 해야할까요?
 
@@ -302,7 +303,7 @@ thread 와 비슷하게 동작은 하지만 thread에 비하여 작업을 쉽게
 
 ------
 
-**세번째, 비동기 병렬 처리를 쉽게 할 수 있습니다.**
+#### 세번째, 비동기 병렬 처리를 쉽게 할 수 있습니다.
 
 
 
@@ -387,3 +388,4 @@ thread에 대하여 충분한 학습을 한 뒤 coroutine을 학습하고
 
 RxJava와 coroutine의 차이점에 대하여도 분석하는것도 추천드립니다.
 
+> [출처] : https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html
