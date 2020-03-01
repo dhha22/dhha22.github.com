@@ -10,12 +10,11 @@ tags: [About, DavidHa, dhha22]
 
 - 이름 : 하동현 (David Ha)
 
-- 약력
+- 개발 경력
   
-  - (현) 힐링페이퍼 (강남언니) : Android Developer 
+  - 힐링페이퍼 (강남언니) : Android Developer (2019.01 ~ 현재)
   
-  - (전) 비브로스 (똑닥) : Android Developer
-  - (전) CAMSCON (캠스콘) : Android Developer
+  - 비브로스 (똑닥) : Android Developer (2018.11 ~ 2019.01)
   
 - GitHub : https://github.com/dhha22/
 
