@@ -8,12 +8,6 @@ categories: Android
 tags: [Android]
 ---
 
-
-
-## Privacy Changes in Android Q#1
-
-
-
 > 해당 글은 제가 Google I/O 19 Extended in Korea Android 에서 발표했던 부분을 정리한 글입니다.
 
 ------

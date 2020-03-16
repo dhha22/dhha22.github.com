@@ -8,7 +8,7 @@ categories: Android
 tags: [Android, Kotlin]
 ---
 
-## Kotlin 안티 패턴 #2
+
 
 > 해당 글은 Droid Kaigi 2018에서 발표했던 Kotlinアンチパターン을 번역한 글입니다.
 
@@ -346,7 +346,7 @@ private val userId by lazy {
   val isAdmin = userId == ADMIN_ID
   ```
 
-  ​
+  
 
 - lazy는 **처음 접근 했을 시**에 계산
 
@@ -354,7 +354,7 @@ private val userId by lazy {
   val isAdmin by lazy { userId == ADMIN_ID}
   ```
 
-  ​
+  
 
 - custom getter은 **접근 할 때** 마다 계산
 

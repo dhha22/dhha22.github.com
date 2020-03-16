@@ -8,8 +8,6 @@ categories: Android
 tags: [Android, RxJava]
 ---
 
-## RxJava를 잘 다룰수 있는 5가지 Tip
-
 RxJava를 처음 사용하거나 알고 있어도 항상 배워야 할 새로운 것이 있습니다.
 해당 5가지 Tip을 알게 되면 RxJava를 좀 더 능숙하게 다룰 수 있게 됩니다.
 
@@ -31,7 +29,7 @@ RxJava를 처음 사용하거나 알고 있어도 항상 배워야 할 새로운
 하지만 위 문자열들을 하나의 단일 스트림에 추가하고 싶을 경우에는 **flatmap**을 사용하면 됩니다.
 **flatmap**연산자는 single sequence로 방출된 단어의 배열을 flattens 하게 만듭니다.
 
-
+------
 
 ### 2. Observable.create(…)를 사용하여 observables를 생성하지 않도록 한다
 
@@ -145,7 +143,7 @@ public class RxBluetoothScanner {
 }
 ```
 
-
+------
 
 ### 3. Backpressure를 다루는 방법
 
@@ -208,7 +206,7 @@ observeOn의 내부 16 element 크기의 buffer가 overflow가 발생했을 경�
 
 ![image_1.6](/assets/img/rx-java/image_1.6.png)
 
-
+------
 
 ### 4. 실수로 스트림을 종료하는 실수를 방지하는 방법
 
@@ -252,7 +250,7 @@ public Observable<SearchResult> search(@NotNull EditText searchView) {
 }
 ```
 
-
+------
 
 ### 5. Observable을 공유하는 방법
 

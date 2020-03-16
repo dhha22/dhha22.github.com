@@ -10,8 +10,6 @@ tags: [Android, MVP, Architecture]
 
 
 
-## How to improve your MVP architectrue and tests #1
-
 > 해당 글은 Droid kaigi 2018에서 발표했던 How to improve your MVP architectrue and tests 를 번역한 글입니다.
 
 ------

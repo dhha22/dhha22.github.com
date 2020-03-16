@@ -9,10 +9,6 @@ categories: Android
 tags: [Android, Coroutine, Kotlin]
 ---
 
-
-
-## Coroutine Basic
-
 > 이번 글에서는 Coroutine의 기본적인 사용 방법과 왜 Coroutine을 써야하는지에 대하여 다뤄보도록 하겠습니다.
 
 **coroutine** 이 **light-weight thread** 같다 라고 말합니다.

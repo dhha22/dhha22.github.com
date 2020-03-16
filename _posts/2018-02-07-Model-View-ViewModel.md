@@ -8,7 +8,7 @@ categories: Android
 tags: [Android, Architecture, MVVM]
 ---
 
-## Model - View - ViewModel
+### Model - View - ViewModel
 
 **MVVM**(Model-View-ViewModel)은 Microsoft의 Ken Cooper와 Ted Peters가 개발한 아키텍처입니다.
 **데이터 바인딩** 메커니즘을 사용한 **UI**부분의 추상화가 특징입니다.
@@ -43,7 +43,7 @@ tags: [Android, Architecture, MVVM]
 반대로 **Model**은 **ViewModel**을 인식하지 못하고 **ViewModel**도 **View**에 대해 알지 못합니다. 
 각각 독립성을 높이고 (캡슐화), 관심사를 분리하고 효율적인 개발을 목표로하고 있습니다.
 
-
+------
 
 ### 데이터바인딩
 
@@ -74,7 +74,7 @@ tags: [Android, Architecture, MVVM]
 플랫폼의 적용 예로는 Android에서 XML 및 Java 코드의 바인딩, WPF와 Silverlight 플랫폼을 기반으로 한 XAML과 C # 소스 코드의 바이딩을 들 수 있습니다. JavaScript의 세계에서 DOM (Document Object Model)과 JavaScript 소스 코드를 바인딩하는 형태로 **MVVM**의 적용 예가 있습니다.
 **MVVM**아키텍처에서 **데이터 바인딩**의 역할은 큰 것입니다.
 
-
+------
 
 ### MVVM의 기반 개념 : Presentation Model
 

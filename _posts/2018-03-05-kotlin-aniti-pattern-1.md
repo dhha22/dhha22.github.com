@@ -8,7 +8,7 @@ categories: Android
 tags: [Android, Kotlin]
 ---
 
-## Kotlin 안티 패턴 #1
+
 
 > 해당 글은 Droid Kaigi 2018에서 발표했던 Kotlinアンチパターン을 번역한 글입니다.
 
