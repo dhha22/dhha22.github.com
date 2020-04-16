@@ -4,6 +4,7 @@ title: Privacy Changes in Android Q#1
 date: 2019-06-15
 comments: true 
 thumbnail: "assets/img/thumbnails/io_2019_android.jpeg"
+image: "assets/img/thumbnails/io_2019_android.jpeg"
 categories: Android
 tags: [Android]
 ---

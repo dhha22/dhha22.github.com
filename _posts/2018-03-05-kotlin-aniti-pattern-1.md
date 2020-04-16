@@ -4,6 +4,7 @@ title: Kotlin 안티패턴#1
 date: 2018-03-05
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_1.png"
+image: "assets/img/thumbnails/2018_droid_kaigi_1.png"
 categories: Android
 tags: [Android, Kotlin]
 ---

@@ -4,6 +4,7 @@ title: How to improve your MVP architectrue and tests#2
 date: 2019-02-18
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_2.png"
+image: "assets/img/thumbnails/2018_droid_kaigi_2.png"
 categories: Android
 tags: [Android, MVP, Architecture]
 ---

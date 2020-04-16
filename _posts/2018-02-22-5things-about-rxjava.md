@@ -4,6 +4,7 @@ title: RxJava를 잘 다룰수 있는 5가지 Tip
 date: 2018-02-22
 comments: true 
 thumbnail: "assets/img/thumbnails/rxjava_tip.jpeg"
+image: "assets/img/thumbnails/rxjava_tip.jpeg"
 categories: Android
 tags: [Android, RxJava]
 ---

@@ -3,6 +3,7 @@ layout: post
 title: MVVM 패턴
 date: 2018-02-07
 thumbnail: "assets/img/thumbnails/mvvm.png"
+image: "assets/img/thumbnails/mvvm.png"
 comments: true  
 categories: Android
 tags: [Android, Architecture, MVVM]
