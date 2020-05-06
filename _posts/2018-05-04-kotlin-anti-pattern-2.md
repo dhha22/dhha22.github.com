@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kotlin 안티패턴#2
+title: Kotlin Anti Pattern #2
 date: 2018-05-04
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_1.png"
@@ -17,7 +17,7 @@ tags: [Android, Kotlin]
 
 
 
-### Kotin 안티패턴 #2 에서 다뤄 볼 주제
+### Kotin Anti Pattern #2 에서 다뤄 볼 주제
 
 - Data Class
 
@@ -30,7 +30,7 @@ tags: [Android, Kotlin]
 - custom getter
 - custom setter
 
-> [Kotlin 안티패턴 #1] : https://dhha22.github.io/android/2018/03/05/kotlin-aniti-pattern-1.html
+> [Kotlin Anti Pattern #1] : https://dhha22.github.io/android/2018/03/05/kotlin-aniti-pattern-1.html
 
 ------
 
@@ -55,7 +55,7 @@ val nextYear = alice.copy(age = 28)
 
 
 
-#### Data Class 안티패턴
+#### Data Class Anti Pattern
 
 인스턴스 생성을 위한 메서드에서 제약을 보증하고 싶을 경우
 
@@ -138,9 +138,9 @@ interface Downloadable {
 
 
 
-#### interface 와 abstract class 안티패턴
+#### interface 와 abstract class Anti Pattern
 
-Java 때부터 잘 알려져 있던 안티패턴중 하나입니다.
+Java 때부터 잘 알려져 있던 Anti Pattern 중 하나입니다.
 
 처리를 공통화 하기 위해 Base 클래스에 여러 메서드를 선언하다 보니 클래스가 점점 비대해 집니다.
 
@@ -274,7 +274,7 @@ fun foo() {
 
 
 
-#### 최상위 함수 및 확장 함수 안티패턴 #1
+#### 최상위 함수 및 확장 함수 Anti Pattern #1
 
 일반성이 없거나 별로 사용하지 않은 메서드를 추가할 경우
 
@@ -285,7 +285,7 @@ fun String.decorate() = "david"+$this+"ha"
 
 
 
-#### 최상위 함수 및 확장 함수 안티패턴 #2
+#### 최상위 함수 및 확장 함수 Anti Pattern #2
 
 공식으로 있음직한 이름인데 엉성하게 구현되어 있을 경우
 
@@ -367,7 +367,7 @@ private val userId by lazy {
 
 
 
-#### lazy와 custom getter 안티패턴 
+#### lazy와 custom getter Anti Pattern
 
 일반적인 대입, lazy, custom getter를 모호하게 구분할 경우
 
@@ -464,9 +464,9 @@ private val userId by lazy {
 
 
 
-#### Fragment 와 lazy 안티패턴
+#### Fragment 와 lazy Anti Pattern
 
-Fragment의 View를 lazy 하는것은 안티패턴입니다.
+Fragment의 View를 lazy 하는것은 Anti Pattern입니다.
 
 ```kotlin
 val button by lazy {
@@ -517,7 +517,7 @@ val isAdmin get() = userId == ADMIN_ID
 
 
 
-#### custom getter 안티패턴 #1
+#### custom getter Anti Pattern #1
 
 값을 가져오는 도중 사이드 이펙트가 발생합니다.
 
@@ -533,7 +533,7 @@ get() {
 
 
 
-#### custom getter 안티패턴 #2
+#### custom getter Anti Pattern #2
 
 계산량이 많습니다.
 
@@ -640,7 +640,7 @@ var ownerName: String by object : ReadWriteProperty<Any, String> {
 
 
 
-#### 변수의 위임 안티패턴
+#### 변수의 위임 Anti Pattern
 
 예: 값이 업데이트 되면 XXX를 업데이트 하고 YYY에 통지하고 ZZZ 값도 업데이트 해야하는 경우
 

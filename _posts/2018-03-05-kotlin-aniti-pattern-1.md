@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kotlin 안티패턴#1
+title: Kotlin Anti Pattern #1
 date: 2018-03-05
 comments: true 
 thumbnail: "assets/img/thumbnails/2018_droid_kaigi_1.png"
@@ -17,7 +17,7 @@ tags: [Android, Kotlin]
 
 
 
-### Kotin 안티패턴 #1 에서 다뤄 볼 주제
+### Kotin Anti Pattern #1 에서 다뤄 볼 주제
 
 - lateinit 과 null 초기화
 
@@ -96,7 +96,7 @@ lateinit var message: TextView	// OK
 
 
 
-#### lateinit 안티패턴
+#### lateinit Anti Pattern
 
 통신 후 얻는 정보를 **lateinit**로 할 경우
 
@@ -236,7 +236,7 @@ val intent = Intent().apply {
 
 
 
-#### Scope 함수 안티패턴
+#### Scope 함수 Anti Pattern
 
 apply 범위 내에서 프로퍼티 접근 형식을 사용할 때
 
@@ -329,7 +329,7 @@ nonNull.length	// OK
 
 
 
-#### Nullable 과 NonNull 안티패턴 #1
+#### Nullable 과 NonNull Anti Pattern #1
 
 Nullable 그대로 데이터를 사용하게 되면 
 
@@ -353,7 +353,7 @@ return team?.user?.name?.length
 
 
 
-#### Nullable 과 NonNull 안티패턴 #2
+#### Nullable 과 NonNull Anti Pattern #2
 
 모든 변수를 NonNull로 하기 위해 잘못된 데이터를 집어 넣으면
 
