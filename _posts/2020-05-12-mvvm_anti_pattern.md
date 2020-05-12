@@ -14,7 +14,7 @@ tags: [Android, MVVM, Architecture]
 
 
 
-#### ViewModel안에 Android Framework가 있어도 될까?
+#### 1. ViewModel안에 Android Framework가 있어도 될까?
 
 ![image1_1](/assets/img/mvvm_anti_pattern/image1_1.png)
 
@@ -26,7 +26,7 @@ Android Framework에 종속성을 가지지 않아야 **lightweight unit test**�
 
 ------
 
-#### ViewModel안에 View를 참조해도 될까?
+#### 2. ViewModel안에 View를 참조해도 될까?
 
 ViewModel은 Activity/Fragment 보다 lifecylce이 깁니다.
 
@@ -63,7 +63,7 @@ viewModel.reviewList.observe(this, Observer {
 
 ------
 
-#### ViewModel에서 MutableLiveData의 접근 제한자를 public으로 설정해도 될까?
+#### 3. ViewModel에서 MutableLiveData의 접근 제한자를 public으로 설정해도 될까?
 
 우선 **MutableLiveData**와 **LiveData**의 차이점은 값을 변경할 수 있는지의 차이 입니다.
 
@@ -90,7 +90,7 @@ ViewModel에 선언된 MutableLiveData를 **getter**나 **backing properties**�
 
 ------
 
-#### Activity/Fragment에 로직이 있어도 될까?
+#### 4. Activity/Fragment에 로직이 있어도 될까?
 
 Activity/Fragment에 if문이라던지 for문 등 복잡한 로직이 존재하면 안됩니다.
 
@@ -102,7 +102,7 @@ view는 일반적으로 unit test가 아니므로 view에 존재하는 로직의
 
 ------
 
-#### Activity/Fragment에 여러개의 ViewModel을 가져도 될까?
+#### 5. Activity/Fragment에 여러개의 ViewModel을 가져도 될까?
 
 우선 Google에서 권장하는 방식은 **하나의 ViewModel만을 사용하는것**을 권장하고 있습니다.
 
@@ -118,7 +118,7 @@ view는 일반적으로 unit test가 아니므로 view에 존재하는 로직의
 
 ------
 
-#### 하나의 ViewModel에는 여러개의 View를 가져도 될까?
+#### 6. 하나의 ViewModel에는 여러개의 View를 가져도 될까?
 
 하나의 ViewModel에 여러개의 View를 가질 수 있지만 
 
@@ -168,7 +168,7 @@ class Repository(private val context: Context) {
 
 ------
 
-#### BindingAdapter, BindingMethod 중 어느것을 써야하나요?
+#### 7. BindingAdapter, BindingMethod 중 어느것을 써야하나요?
 
 **layout file**에서 지정된 이름의 **attribute**가 없을 경우 
 
