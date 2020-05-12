@@ -16,7 +16,7 @@ tags: [Android, MVVM, Architecture]
 
 #### ViewModel안에 Android Framework가 있어도 될까?
 
-![image1_1](/Users/david/Desktop/dhha22.github.com/assets/img/mvvm_anti_pattern/image1_1.png)
+![image1_1](/assets/img/mvvm_anti_pattern/image1_1.png)
 
 **ViewModel**에는 **Android Framework** 존재를 알아서는 안됩니다.
 
@@ -30,7 +30,7 @@ Android Framework에 종속성을 가지지 않아야 **lightweight unit test**�
 
 ViewModel은 Activity/Fragment 보다 lifecylce이 깁니다.
 
-![image1_2](/Users/david/Desktop/dhha22.github.com/assets/img/mvvm_anti_pattern/image1_2.png)
+![image1_2](/assets/img/mvvm_anti_pattern/image1_2.png)
 
 Activity/Fragment가 **destroy** 되고 **recreate** 되었을 경우 기존에 존재하던 ViewModel을 가지게 됩니다.
 
@@ -44,7 +44,7 @@ View 뿐만 아니라 **Activity의 context를 참조하고 있는 class**도 �
 
 ViewModel안에 정의된 LiveData를 활용하여 **observer pattern**을 이용하면 됩니다.
 
-![image1_3](/Users/david/Desktop/dhha22.github.com/assets/img/mvvm_anti_pattern/image1_3.png)
+![image1_3](/assets/img/mvvm_anti_pattern/image1_3.png)
 
 
 
@@ -112,7 +112,7 @@ view는 일반적으로 unit test가 아니므로 view에 존재하는 로직의
 
 하나의 ViewModel에는 여러 LiveData를 가지는게 더 효율적으로 코드를 관리 할 수 있습니다.
 
-![image1_5](/Users/david/Desktop/dhha22.github.com/assets/img/mvvm_anti_pattern/image1_5.png)
+![image1_5](/assets/img/mvvm_anti_pattern/image1_5.png)
 
 특히 RecyclerView에서 여러 **LiveData object**를 적용하면 아주 쉽게 데이터를 관리할 수 있습니다. 
 
@@ -141,7 +141,7 @@ class TestViewModel(private val context: Context) : ViewModel() {
 
 ViewModel의 생성자로 Context를 받아서 바로 SharedPreference 이용하여 데이터를 저장하는게 아니라
 
-![image1_6](/Users/david/Desktop/dhha22.github.com/assets/img/mvvm_anti_pattern/image1_6.png)
+![image1_6](/assets/img/mvvm_anti_pattern/image1_6.png)
 
 다음과 같이 ViewModel의 생성자로 **Repository**를 받고
 
