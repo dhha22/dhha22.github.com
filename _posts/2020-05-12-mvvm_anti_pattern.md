@@ -22,7 +22,7 @@ tags: [Android, MVVM, Architecture]
 
 Android Framework에 종속성을 가지지 않아야 **lightweight unit test**를 진행할 수 있게 되어 **leak safety**와 **modularity**가 향상됩니다.
 
-아주 쉽게 확인 할 수 있는 방법은 ViewModel 안에 **android.*** 에 관한 패키지의 import 여부에 대해 확인하시면 됩니다.
+종속성을 가지고 있는지에 대해 쉽게 확인 할 수 있는 방법은 ViewModel 안에 **android.*** 에 관한 패키지의 import 여부에 대해 확인하시면 됩니다.
 
 ------
 
@@ -82,7 +82,7 @@ class TestViewModel : ViewModel() {
 }
 ```
 
-Activity/Fragment에서 LiveData 값을 변경 할 수 있기 때문에 이러한 행동은 MVVM Architecture에 위배되는 행동입닌다.
+Activity/Fragment에서 LiveData 값을 변경 할 수 있기 때문에 이러한 행동은 MVVM Architecture에 위배되는 행동입니다.
 
 View는 오로지 LiveData를 observe만 해야하기 때문에 
 
