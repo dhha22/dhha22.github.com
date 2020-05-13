@@ -28,7 +28,7 @@ Android Framework에 종속성을 가지지 않아야 **lightweight unit test**�
 
 #### 2. ViewModel안에 View를 참조해도 될까?
 
-ViewModel은 Activity/Fragment 보다 lifecylce이 깁니다.
+ViewModel은 Activity/Fragment 보다 lifecycle이 깁니다.
 
 ![image1_2](/assets/img/mvvm_anti_pattern/image1_2.png)
 
