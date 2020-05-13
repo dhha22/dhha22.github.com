@@ -10,7 +10,7 @@ tags: [Android, MVVM, Architecture]
 
 ---
 
-> MVVM Architecture을 적용할 때 피해야할 pattern에 대하여 다뤄보도록 하겠습니다.
+> MVVM Architecture을 적용할 때 피해야할 패턴에 대하여 다뤄보도록 하겠습니다.
 
 
 
