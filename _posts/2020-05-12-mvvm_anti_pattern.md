@@ -104,7 +104,7 @@ view는 일반적으로 unit test가 아니므로 view에 존재하는 로직의
 
 #### 5. Activity/Fragment에 여러개의 ViewModel을 가져도 될까?
 
-우선 Google에서 권장하는 방식은 **하나의 ViewModel만을 사용하는것**을 권장하고 있습니다.
+[우선 Google에서 권장하는 방식은 **하나의 ViewModel만을 사용하는것**을 권장](https://www.youtube.com/watch?v=Ts-uxYiBEQ8&feature=youtu.be&t=8m40s)하고 있습니다.
 
 상황에 따라서 여러개의 ViewModel을 사용할 수 있지만 
 
