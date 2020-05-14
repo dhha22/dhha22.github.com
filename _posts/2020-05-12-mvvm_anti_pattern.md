@@ -18,7 +18,7 @@ tags: [Android, MVVM, Architecture]
 
 ![image1_1](/assets/img/mvvm_anti_pattern/image1_1.png)
 
-**ViewModel**에는 **Android Framework** 존재를 알아서는 안됩니다.
+**ViewModel**에는 **Android Framework**가 최대한 없는 방향으로 코드를 작성해야합니다.
 
 Android Framework에 종속성을 가지지 않아야 **lightweight unit test**를 진행할 수 있게 되어 **leak safety**와 **modularity**가 향상됩니다.
 
@@ -84,9 +84,11 @@ class TestViewModel : ViewModel() {
 
 Activity/Fragment에서 LiveData 값을 변경 할 수 있기 때문에 이러한 행동은 MVVM Architecture에 위배되는 행동입니다.
 
-View는 오로지 LiveData를 observe만 해야하기 때문에 
+Two-way Data Binding 같은 예외적인 케이스를 제외하고 View는 오로지 LiveData를 observe만 해야하기 때문에 
 
 ViewModel에 선언된 MutableLiveData를 **getter**나 **backing properties**를 이용하여 **캡슐화**를 해야합니다.
+
+
 
 ------
 
@@ -186,6 +188,7 @@ class Repository(private val context: Context) {
 BindingAdapter는 주로 extension 형식으로 사용되고
 
 ```kotlin
+@BindingAdapter("app:items")
 fun BadgeStackView.setData(data:List<String>?) {
   setData(data)
 }
